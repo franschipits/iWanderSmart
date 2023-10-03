@@ -7,7 +7,7 @@ db = SQLAlchemy()
 
 class User(db.Model):
     """A user"""
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_name = db.Column(db.String)
@@ -20,24 +20,25 @@ class User(db.Model):
     def __repr__(self):
         """Show info about the user"""
 
-        return f"<User user_id={self.user_id} email={self.email}>"
+        return f"<User user_id={self.user_id} name={self.user_name}>"
 
 
 
-class User_Itinenary(db.Model):
+class User_Itinerary(db.Model):
     """"A User Itinerary"""
     __tablename__ = "user_itinerary"
 
     user_itinerary_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    creator = db.Column(db.Integer, db.ForeignKey("user.user_id"))
+    creator = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     places_id = db.Column(db.Integer, db.ForeignKey("places.places_id"))
 
+
     saved_itineraries = db.relationship("Saved_Itinerary", back_populates="user_itinerary")
-    
     itinerary_activities = db.relationship("Itinerary_Activities", back_populates="user_itinerary")
     stays = db.relationship("Stays", back_populates="user_itinerary")
     flights = db.relationship("Flights", back_populates="user_itinerary")
     places = db.relationship("Places", back_populates="user_itinerary")
+
 
     def __repr__(self):
         """"Show info about the user itinerary"""
@@ -51,7 +52,7 @@ class Saved_Itinerary(db.Model):
     __tablename__ = "saved_itineraries"
 
     saved_itineraries_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"))
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     user_itinerary_id = db.Column(db.Integer, db.ForeignKey("user_itinerary.user_itinerary_id"))
 
     user = db.relationship("User", back_populates="saved_itineraries")
@@ -92,10 +93,10 @@ class Itinerary_Activities(db.Model):
     activities = db.relationship("Activities", back_populates="itinerary_activities")
 
     def __repr__(self):
-        return f"<Itinerary_Actibities itinerary_activities_id={self.itinerary_activities_id} activities={self.activities}>"
+        return f"<Itinerary_Activities itinerary_activities_id={self.itinerary_activities_id} activities={self.activities}>"
     
 
-
+ 
 class Activities(db.Model):
     """Information about specific activities"""
     __tablename__ = "activities"
@@ -155,9 +156,9 @@ class Places(db.Model):
     state = db.Column(db.String)
     city = db.Column(db.String)
     passport = db.Column(db.Boolean)
-    Visa = db.Column(db.Boolean)
+    visa = db.Column(db.Boolean)
 
-    user_itinenary = db.relationship("User_Itinerary", back_populates="places")
+    user_itinerary = db.relationship("User_Itinerary", back_populates="places")
 
     def __repr__(self):
         return f"<Places places_id={self.places_id} country={self.country}>"
