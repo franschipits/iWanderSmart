@@ -14,15 +14,37 @@ def create_user(user_name, email, password, budget=0):
 
     return user
 
+def get_users():
+    """Return all users."""
+
+    return User.query.all()
+
+
+def get_user_by_id(user_id):
+    
+    return User.query.get(user_id)
+
+
+def get_user_by_email(email):
+    """"Return a user by email"""
+
+    return User.query.filter(User.email == email).first()
+
 
 def create_user_itinerary(creator, places_id):
 
     user_itinerary = User_Itinerary(
-        creator = creator,
+        creator=creator,
         places_id=places_id,
     )
 
     return user_itinerary
+
+
+def get_user_itinerary():
+    """Return all user itineraries."""
+
+    return User_Itinerary.query.all()
 
 
 def create_saved_itinerary(user_id, user_itinerary_id):

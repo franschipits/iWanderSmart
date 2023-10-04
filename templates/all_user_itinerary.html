@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}All User Itineraries{% endblock %}
+
+{% block body %}
+    <h1>All User Itineraries</h1>
+
+    <ul> 
+    {% for itinerary in user_itinerary %}
+        <li> 
+            <a href="/user_itinerary/{{itinerary.user_itinerary_id}}">
+                {{itinerary.user_itinerary_id}}
+            </a>
+        </li>
+
+    {% endfor %}
+    </ul>
+{% endblock %}
