@@ -1,7 +1,6 @@
 """CRUD operations."""
 
 from model import db, User, User_Itinerary, Saved_Itinerary, Flights, Itinerary_Activities, Activities, Hotel, Stays, Places, connect_to_db
-
 def create_user(user_name, email, password, budget=0):
     """Create and return a new user."""
 
@@ -45,6 +44,11 @@ def get_user_itinerary():
     """Return all user itineraries."""
 
     return User_Itinerary.query.all()
+
+def get_user_itinerary_by_id(user_itinerary_id):
+    
+
+    return User_Itinerary.query.get(user_itinerary_id)
 
 
 def create_saved_itinerary(user_id, user_itinerary_id):
@@ -100,7 +104,7 @@ def create_hotel(name, location, contact):
     )
 
     return hotel
-
+ 
 
 def create_stays(hotel_id, user_itinerary_id, price, num_nights):
 
@@ -125,7 +129,6 @@ def create_places(country, state, city, passport, visa):
     )
 
     return places
-
 
 
 

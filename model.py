@@ -176,4 +176,4 @@ def connect_to_db(flask_app, db_uri="postgresql:///travels", echo=True):
 
 if __name__ == '__main__':
     import server
-    connect_to_db(server.app)
+    connect_to_db(server.app) 
