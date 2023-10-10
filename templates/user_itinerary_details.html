@@ -1,8 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ user_itinerary.creator }} - Details{% endblock %}
+{% block title %}{{ user_itinerary.places.city }} - Details{% endblock %}
 
 {% block body %}
-<h1>{{ user_itinerary.creator }}</h1>
- 
+<h1>{{ user_itinerary.places.city }}</h1>
+<h1>{{ user_itinerary.places.state }}</h1>
+<h2>{{ user_itinerary.places.country }}</h2>
+
+    <ul>
+    {% for stay in user_itinerary.stays %}
+        <li>Number of nights: {{stay.num_nights}} </li>
+        <li>Price: {{stay.price}}</li>
+        <li>Hotel name: {{stay.hotel.name}}</li>
+    {% endfor %}
+   </ul>
+
+   <ul>
+    {% for flight in user_itinerary.flights %}
+        <li>Type of Flight: {{flight.type_flight}} </li>
+        <li>Date/Time: {{flight.date_time}} </li>
+        <li>Price: {{flight.price}} </li>
+    {% endfor %}
+   </ul>
+
+   <ul>
+    {% for activity in user_itinerary.itinerary_activities %}
+        <li>Activity Name: {{activity.activities.name}} </li>
+        <li>Adress: {{activity.activities.address}} </li>
+        <li>Contact: {{activity.activities.contact_info}} </li>
+    {% endfor %}
+   </ul>
+   
+
 {% endblock %}

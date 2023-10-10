@@ -22,7 +22,7 @@ class User(db.Model):
 
         return f"<User user_id={self.user_id} name={self.user_name}>"
 
-
+ 
 
 class User_Itinerary(db.Model):
     """"A User Itinerary"""

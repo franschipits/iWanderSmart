@@ -85,7 +85,7 @@ def show_profile():
     user_itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
 
     return render_template("profile.html", user=user, itineraries=itineraries, user_itineraries=user_itineraries)
-
+ 
 
 @app.route("/user_itinerary")
 def all_user_itineraries():
@@ -106,32 +106,26 @@ def show_user_itinerary(user_itinerary_id):
 
 
 #VIEW ITINERARIES THAT USER CREATED AFTER USER LOG IN:
-# @app.route("/user_itinerary")
-# def all_user_itineraries():
-#     """"View all user itineraries"""
+@app.route("/user_itinerary")
+def user_itineraries_details():
+    """"View user itineraries details"""
 
-#     # If the user isn't logged in, flash a message saying "please log in" and redirect to homepage
-#     # If the user is logged in, their email is in session['current_user']
-#     # To get all THAT USER's itineraries:
-#     #       Look up the user ID for that email
-#     #           0) The user's email address will be session['current_user']
-#     #           1) get their email, the use user = crud.get_user_by_email(...)
-#     #           2) their ID is user.user_id
-#     #       Find all the user_itineraries that have that ID for their creator
-#     #           0) User_Itinerary.query.filter_by(creator=user.user_id)
-#     # Give all those itineraries to the render_template to show in HTML
-#     login = session['current_user'] = user.email
-
-#     if not login:
-#         flash("Please log in")
-
-#     else:
-#         user = crud.get_user_by_email(user.email)
-#         user = crud.get_user_by_id(user.user_id)
-#         User_Itinerary.query.filter_by(creator=user.user_id)
+    # If the user isn't logged in, flash a message saying "please log in" and redirect to homepage
+    # If the user is logged in, their email is in session['current_user']
+    # To get all THAT USER's itineraries:
+    #       Look up the user ID for that email
+    #           0) The user's email address will be session['current_user']
+    #           1) get their email, the use user = crud.get_user_by_email(...)
+    #           2) their ID is user.user_id
+    #       Find all the user_itineraries that have that ID for their creator
+    #           0) User_Itinerary.query.filter_by(creator=user.user_id)
+    # Give all those itineraries to the render_template to show in HTML
     
+    user = crud.get_user_by_email(session["current_user"])
+    itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
+    
+    return render_template("user_itinerary_details.html", user=user, itineraries=itineraries)
 
-#     return render_template("all_user_itinerary.html", user_itinerary=user_itinerary)
 
 if __name__ == "__main__":
     connect_to_db(app)

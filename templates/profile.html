@@ -5,19 +5,24 @@
    <h1>{{ user.user_name }}</h1>
    <h2>Budget</h2>
     <h2>{{ user.budget }}</h2>
-    
+
 
     <h2>Saved Itineraries</h2>
    <ul>
     {% for itinerary in itineraries %}
-        <li>{{itinerary.user_itinerary_id}}</li>
+        <li>{{itinerary.user_itinerary.places.city}}</li>
     {% endfor %}
    </ul>
 
-   <h2>User_Itineraries</h2>
+   <h2>User Itineraries</h2>
    <ul>
     {% for user_itinerary in user_itineraries %}
-        <li>{{user_itinerary.places_id}}</li>
+        <li>
+            <a href="/user_itinerary/{{user_itinerary.user_itinerary_id}}">
+            {{user_itinerary.places.city}}
+            </a>
+        </li>
+        
     {% endfor %}
     
    </ul>

@@ -90,7 +90,7 @@ flights = [{'type_flight':"departure",
 list_flights = []
 
 for flight in flights:
-    new_flight = crud.create_flights(user_itinerary[0].user_itinerary_id, flight['type_flight'], flight['date_time'], flight['price'])
+    new_flight = crud.create_flights(user_itinerary[1].user_itinerary_id, flight['type_flight'], flight['date_time'], flight['price'])
     list_flights.append(new_flight)
 
 model.db.session.add_all(list_flights)
