@@ -4,8 +4,12 @@
 {% block body %}
    <h1>{{ user.user_name }}</h1>
    <h2>Budget</h2>
-    <h2>{{ user.budget }}</h2>
-
+    <h2 id="user_budget"> {{ user.budget }}</h2>
+    <form id="budget_update">
+        <label for="budget">Update Budget:</label><br>
+        <input type="text" id="budget" name="budget" value=""><br>
+        <input type="submit" value="Submit">
+        </form>
 
     <h2>Saved Itineraries</h2>
    <ul>
@@ -13,7 +17,7 @@
         <li>{{itinerary.user_itinerary.places.city}}</li>
     {% endfor %}
    </ul>
-
+ 
    <h2>User Itineraries</h2>
    <ul>
     {% for user_itinerary in user_itineraries %}
@@ -26,4 +30,5 @@
     {% endfor %}
     
    </ul>
+<script src="/static/budget_update.js"> </script>   
 {% endblock %}

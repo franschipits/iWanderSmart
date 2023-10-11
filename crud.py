@@ -36,7 +36,7 @@ def create_user_itinerary(creator, places_id):
         creator=creator,
         places_id=places_id,
     )
-
+ 
     return user_itinerary
 
 

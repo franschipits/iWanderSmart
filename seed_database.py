@@ -88,11 +88,11 @@ flights = [{'type_flight':"departure",
            ]
 
 list_flights = []
-
+n = 0
 for flight in flights:
-    new_flight = crud.create_flights(user_itinerary[1].user_itinerary_id, flight['type_flight'], flight['date_time'], flight['price'])
+    new_flight = crud.create_flights(user_itinerary[n].user_itinerary_id, flight['type_flight'], flight['date_time'], flight['price'])
     list_flights.append(new_flight)
-
+    n = n + 1
 model.db.session.add_all(list_flights)
 model.db.session.commit()
 
@@ -109,7 +109,7 @@ saved_itineraries.append(new_save2)
 model.db.session.add_all(saved_itineraries)
 model.db.session.commit()
 
-
+ 
 #Activities:
 activities = [{'name':"Museum",
            'address':"123 Museum St",

@@ -1,5 +1,5 @@
 from flask import (Flask, render_template, request, flash, session,
-                   redirect)
+                   redirect, jsonify)
 from model import connect_to_db, db, User, User_Itinerary, Saved_Itinerary
 import crud
 
@@ -85,7 +85,18 @@ def show_profile():
     user_itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
 
     return render_template("profile.html", user=user, itineraries=itineraries, user_itineraries=user_itineraries)
- 
+
+
+@app.route("/budget_update", methods=['POST'])
+def show_budget():
+
+    budget = request.json.get('new_budget')
+    user = crud.get_user_by_email(session["current_user"])
+    user.budget = int(budget)
+    db.session.commit()
+    print(user.budget)
+    return jsonify({'budget': budget})    
+
 
 @app.route("/user_itinerary")
 def all_user_itineraries():
@@ -104,7 +115,7 @@ def show_user_itinerary(user_itinerary_id):
 
     return render_template("user_itinerary_details.html", user_itinerary=user_itinerary)
 
-
+ 
 #VIEW ITINERARIES THAT USER CREATED AFTER USER LOG IN:
 @app.route("/user_itinerary")
 def user_itineraries_details():

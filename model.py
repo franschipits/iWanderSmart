@@ -78,7 +78,7 @@ class Flights(db.Model):
     def __repr__(self):
         return f"<Flights flight_id={self.flight_id} type_flight={self.type_flight}>"
     
-
+ 
 
 class Itinerary_Activities(db.Model):
     """Itinerary for things to do"""
