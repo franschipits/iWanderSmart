@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-
+ 
 class User(db.Model):
     """A user"""
     __tablename__ = "users"
@@ -15,7 +15,7 @@ class User(db.Model):
     password = db.Column(db.String)
     budget = db.Column(db.Float)
 
-    saved_itineraries = db.relationship("Saved_Itinerary", back_populates="user")
+    # saved_itineraries = db.relationship("Saved_Itinerary", back_populates="user")
     
     def __repr__(self):
         """Show info about the user"""
@@ -33,7 +33,7 @@ class User_Itinerary(db.Model):
     places_id = db.Column(db.Integer, db.ForeignKey("places.places_id"))
 
 
-    saved_itineraries = db.relationship("Saved_Itinerary", back_populates="user_itinerary")
+    # saved_itineraries = db.relationship("Saved_Itinerary", back_populates="user_itinerary")
     itinerary_activities = db.relationship("Itinerary_Activities", back_populates="user_itinerary")
     stays = db.relationship("Stays", back_populates="user_itinerary")
     flights = db.relationship("Flights", back_populates="user_itinerary")
@@ -47,19 +47,19 @@ class User_Itinerary(db.Model):
     
 
     
-class Saved_Itinerary(db.Model):
-    """"The itineraries saved by the user"""
-    __tablename__ = "saved_itineraries"
+# class Saved_Itinerary(db.Model):
+#     """"The itineraries saved by the user"""
+#     __tablename__ = "saved_itineraries"
 
-    saved_itineraries_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    user_itinerary_id = db.Column(db.Integer, db.ForeignKey("user_itinerary.user_itinerary_id"))
+#     saved_itineraries_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
+#     user_itinerary_id = db.Column(db.Integer, db.ForeignKey("user_itinerary.user_itinerary_id"))
 
-    user = db.relationship("User", back_populates="saved_itineraries")
-    user_itinerary = db.relationship("User_Itinerary", back_populates="saved_itineraries")
+#     user = db.relationship("User", back_populates="saved_itineraries")
+#     user_itinerary = db.relationship("User_Itinerary", back_populates="saved_itineraries")
 
-    def __repr__(self):
-        return f"<Saved_Itinerary saved_itineraries_id={self.saved_itineraries_id} user_itinerary={self.user_itinerary}>"
+#     def __repr__(self):
+#         return f"<Saved_Itinerary saved_itineraries_id={self.saved_itineraries_id} user_itinerary={self.user_itinerary}>"
     
 
 

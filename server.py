@@ -1,6 +1,6 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
-from model import connect_to_db, db, User, User_Itinerary, Saved_Itinerary
+from model import connect_to_db, db, User, User_Itinerary
 import crud
 
 from jinja2 import StrictUndefined
@@ -76,13 +76,20 @@ def user_login():
     
     return redirect("/")
 
-
+ 
 @app.route("/profile")
 def show_profile():
 
     user = crud.get_user_by_email(session["current_user"])
     itineraries = Saved_Itinerary.query.filter_by(user_id=user.user_id).all()
     user_itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
+
+    if itineraries is None:
+        itineraries = []
+    
+    if user_itineraries is None:
+        user_itineraries = []
+
 
     return render_template("profile.html", user=user, itineraries=itineraries, user_itineraries=user_itineraries)
 
@@ -106,6 +113,15 @@ def all_user_itineraries():
 
     return render_template("all_user_itinerary.html", user_itinerary=user_itinerary)
 
+
+@app.route("/delete_itinerary", methods=['POST'])
+def delete_itinerary():
+
+        delete_user_itinerary = request.json.get('delete_itinerary')
+        del_itinerary = crud.get_user_itinerary_by_id(int(delete_user_itinerary))
+        db.session.delete(del_itinerary)
+        db.session.commit()
+        return jsonify({'message': 'Success!'})
 
 @app.route("/user_itinerary/<user_itinerary_id>")
 def show_user_itinerary(user_itinerary_id):

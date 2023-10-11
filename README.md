@@ -8,8 +8,8 @@ Plan for moving forward
     - Form where the user can type in their info (Done)
     - Submit it to server, set the session cookie if their info matches (Done)
 
-5) Try to show all that user's itineraries as a list on a separate page
+5) Try to show all that user's itineraries as a list on a separate page (Done)
 
-6) Click on an itinerary and see all the things on the itinerary on a separate page
+6) Click on an itinerary and see all the things on the itinerary on a separate page(Done)
 
 7) Editing itinerary - adding, saving, etc.

@@ -98,18 +98,18 @@ model.db.session.commit()
 
 
 #Saved_Itinerary:
-saved_itineraries = []
+# saved_itineraries = []
 
-new_save = crud.create_saved_itinerary(users[1].user_id, user_itinerary[2].user_itinerary_id)
-saved_itineraries.append(new_save)
+# new_save = crud.create_saved_itinerary(users[1].user_id, user_itinerary[2].user_itinerary_id)
+# saved_itineraries.append(new_save)
 
-new_save2 = crud.create_saved_itinerary(users[4].user_id, user_itinerary[1].user_itinerary_id)
-saved_itineraries.append(new_save2)
+# new_save2 = crud.create_saved_itinerary(users[4].user_id, user_itinerary[1].user_itinerary_id)
+# saved_itineraries.append(new_save2)
 
-model.db.session.add_all(saved_itineraries)
-model.db.session.commit()
+# model.db.session.add_all(saved_itineraries)
+# model.db.session.commit()
 
- 
+
 #Activities:
 activities = [{'name':"Museum",
            'address':"123 Museum St",
@@ -141,7 +141,7 @@ new_activity_itinerary = crud.create_itinerary_activities(user_itinerary[1].user
 activities_itinerary.append(new_activity_itinerary)
 
 new_activity_itinerary2 = crud.create_itinerary_activities(user_itinerary[2].user_itinerary_id, list_activities[1].activities_id, price=0)
-saved_itineraries.append(activities_itinerary.append(new_activity_itinerary2))
+activities_itinerary.append(new_activity_itinerary2)
 
 model.db.session.add_all(activities_itinerary)
 model.db.session.commit()

@@ -11,24 +11,20 @@
         <input type="submit" value="Submit">
         </form>
 
-    <h2>Saved Itineraries</h2>
-   <ul>
-    {% for itinerary in itineraries %}
-        <li>{{itinerary.user_itinerary.places.city}}</li>
-    {% endfor %}
-   </ul>
- 
+
    <h2>User Itineraries</h2>
+   {% if user_itineraries %}
    <ul>
     {% for user_itinerary in user_itineraries %}
         <li>
             <a href="/user_itinerary/{{user_itinerary.user_itinerary_id}}">
             {{user_itinerary.places.city}}
             </a>
-        </li>
-        
+        </li>       
     {% endfor %}
-    
    </ul>
+   {% endif %}
+
+   
 <script src="/static/budget_update.js"> </script>   
 {% endblock %}
