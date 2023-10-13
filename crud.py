@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, User_Itinerary, Flights, Itinerary_Activities, Activities, Hotel, Stays, Places, connect_to_db
+from model import db, User, User_Itinerary, Flights, Activities, Hotel, Places, connect_to_db
 def create_user(user_name, email, password, budget=0):
     """Create and return a new user."""
 
@@ -13,7 +13,7 @@ def create_user(user_name, email, password, budget=0):
 
     return user
 
- 
+  
 def get_users():
     """Return all users."""
 
@@ -41,10 +41,17 @@ def create_user_itinerary(creator, places_id):
     return user_itinerary
 
 
-def get_user_itinerary():
+def get_user_itinerary(user):
+    """Return all user itineraries."""
+
+    return User_Itinerary.query.filter(User_Itinerary.user == user).first()
+
+
+def get_user_itineraries():
     """Return all user itineraries."""
 
     return User_Itinerary.query.all()
+
 
 def get_user_itinerary_by_id(user_itinerary_id):
     
@@ -74,49 +81,51 @@ def create_flights(user_itinerary_id, type_flight, date_time, price):
     return flights
 
 
-def create_itinerary_activities(user_itinerary_id, activities_id, price):
+# def create_itinerary_activities(user_itinerary_id, activities_id, price):
 
-    itinerary_activities = Itinerary_Activities(
-        user_itinerary_id=user_itinerary_id,
-        activities_id=activities_id,
-        price=price,
-    )
+#     itinerary_activities = Itinerary_Activities(
+#         user_itinerary_id=user_itinerary_id,
+#         activities_id=activities_id,
+#         price=price,
+#     )
 
-    return itinerary_activities
+#     return itinerary_activities
 
 
-def create_activities(name, address, contact_info):
+def create_activities(name, address, contact_info, user_itinerary_id):
 
     activities = Activities(
         name=name,
         address=address,
         contact_info=contact_info,
+        user_itinerary_id=user_itinerary_id,
     )
 
     return activities
 
 
-def create_hotel(name, location, contact):
+def create_hotel(name, location, contact, user_itinerary_id):
 
     hotel = Hotel(
         name=name,
         location=location,
         contact=contact,
+        user_itinerary_id=user_itinerary_id,
     )
 
     return hotel
  
 
-def create_stays(hotel_id, user_itinerary_id, price, num_nights):
+# def create_stays(hotel_id, user_itinerary_id, price, num_nights):
 
-    stays = Stays(
-        hotel_id=hotel_id,
-        user_itinerary_id=user_itinerary_id,
-        price=price,
-        num_nights=num_nights,
-    )
+#     stays = Stays(
+#         hotel_id=hotel_id,
+#         user_itinerary_id=user_itinerary_id,
+#         price=price,
+#         num_nights=num_nights,
+#     )
 
-    return stays
+#     return stays
 
 
 def create_places(country, state, city, passport, visa):

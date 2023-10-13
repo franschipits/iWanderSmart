@@ -127,7 +127,7 @@ activities = [{'name':"Museum",
 list_activities = []
 
 for activity in activities:
-    new_activity = crud.create_activities(activity['name'], activity['address'], activity['contact_info'])
+    new_activity = crud.create_activities(activity['name'], activity['address'], activity['contact_info'], user_itinerary[1].user_itinerary_id)
     list_activities.append(new_activity)
 
 model.db.session.add_all(list_activities)
@@ -135,16 +135,16 @@ model.db.session.commit()
 
 
 #Itinerary Activities:
-activities_itinerary = []
+# activities_itinerary = []
 
-new_activity_itinerary = crud.create_itinerary_activities(user_itinerary[1].user_itinerary_id, list_activities[2].activities_id, price=0)
-activities_itinerary.append(new_activity_itinerary)
+# new_activity_itinerary = crud.create_itinerary_activities(user_itinerary[1].user_itinerary_id, list_activities[2].activities_id, price=0)
+# activities_itinerary.append(new_activity_itinerary)
 
-new_activity_itinerary2 = crud.create_itinerary_activities(user_itinerary[2].user_itinerary_id, list_activities[1].activities_id, price=0)
-activities_itinerary.append(new_activity_itinerary2)
+# new_activity_itinerary2 = crud.create_itinerary_activities(user_itinerary[2].user_itinerary_id, list_activities[1].activities_id, price=0)
+# activities_itinerary.append(new_activity_itinerary2)
 
-model.db.session.add_all(activities_itinerary)
-model.db.session.commit()
+# model.db.session.add_all(activities_itinerary)
+# model.db.session.commit()
 
 
 #Hotels:
@@ -164,22 +164,22 @@ hotels = [{'name':"Hotel Inn",
 list_hotels = []
 
 for hotel in hotels:
-    new_hotel = crud.create_hotel(hotel['name'], hotel['location'], hotel['contact'])
+    new_hotel = crud.create_hotel(hotel['name'], hotel['location'], hotel['contact'], user_itinerary[1].user_itinerary_id)
     list_hotels.append(new_hotel)
 
 model.db.session.add_all(list_hotels)
 model.db.session.commit()
-
+ 
 
 #Stays:
-stays_list = []
+# stays_list = []
 
-new_stay = crud.create_stays(user_itinerary[1].user_itinerary_id, list_hotels[2].hotel_id, price=0, num_nights=3)
-stays_list.append(new_stay)
+# new_stay = crud.create_stays(user_itinerary[1].user_itinerary_id, list_hotels[2].hotel_id, price=0, num_nights=3)
+# stays_list.append(new_stay)
 
-new_stay2 = crud.create_stays(user_itinerary[2].user_itinerary_id, list_hotels[0].hotel_id, price=0, num_nights=5)
-stays_list.append(new_stay2)
+# new_stay2 = crud.create_stays(user_itinerary[2].user_itinerary_id, list_hotels[0].hotel_id, price=0, num_nights=5)
+# stays_list.append(new_stay2)
 
-model.db.session.add_all(stays_list)
-model.db.session.commit()
+# model.db.session.add_all(stays_list)
+# model.db.session.commit()
  

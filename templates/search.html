@@ -6,6 +6,12 @@
 {% for result in result_list %}
 <h1>{{result['name']}}</h1>
 {{result['formatted_address']}}
+<form action="/add_hotel" method="POST">
+<input type="hidden" name= "name" value="{{result['name']}}">
+<input type="hidden" name="location" value="{{result['formatted_address']}}">
+<button type="submit"> Add to itinerary </button>
+</form>
+
 
 
 {% endfor %}

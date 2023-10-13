@@ -17,7 +17,7 @@ def homepage():
 
     return render_template('homepage.html')
 
-
+ 
 @app.route("/users")
 def all_users():
     """"View all users"""
@@ -111,7 +111,7 @@ def show_budget():
 def all_user_itineraries():
     """"View all user itineraries"""
 
-    user_itinerary = crud.get_user_itinerary()
+    user_itinerary = crud.get_user_itineraries()
 
     return render_template("all_user_itinerary.html", user_itinerary=user_itinerary)
 
@@ -124,6 +124,7 @@ def delete_itinerary():
         db.session.delete(del_itinerary)
         db.session.commit()
         return jsonify({'message': 'Success!'})
+
 
 @app.route("/user_itinerary/<user_itinerary_id>")
 def show_user_itinerary(user_itinerary_id):
@@ -168,6 +169,20 @@ def search_bar():
     result_list = result['results'] 
 
     return render_template("search.html", result_list=result_list)
+
+
+@app.route("/add_hotel", methods=['POST'])
+def create_add_hotel():
+
+    user = crud.get_user_by_email(session["current_user"])
+    name = request.form['name']
+    location = request.form['location']
+    user_itinerary = crud.get_user_itinerary(user)
+    hotel = crud.create_hotel(name, location, None, user_itinerary.user_itinerary_id)
+    db.session.add(hotel)
+    db.session.commit()
+
+    return render_template("user_itinerary_details.html", user_itinerary=user_itinerary)
 
 
 if __name__ == "__main__":

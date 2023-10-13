@@ -10,7 +10,7 @@
         <input type="text" id="budget" name="budget" value=""><br>
         <input type="submit" value="Submit">
         </form>
-
+ 
 
    <h2>User Itineraries</h2>
    {% if user_itineraries %}
@@ -25,6 +25,9 @@
    </ul>
    {% endif %}
 
+
+
+   <form action="/new_itinerary" method="POST">
 
 
 

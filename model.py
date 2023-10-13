@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-
+ 
 class User(db.Model):
     """A user"""
     __tablename__ = "users"
@@ -16,6 +16,7 @@ class User(db.Model):
     budget = db.Column(db.Float)
 
     # saved_itineraries = db.relationship("Saved_Itinerary", back_populates="user")
+    user_itineraries = db.relationship("User_Itinerary", back_populates="user")
     
     def __repr__(self):
         """Show info about the user"""
@@ -34,10 +35,11 @@ class User_Itinerary(db.Model):
 
 
     # saved_itineraries = db.relationship("Saved_Itinerary", back_populates="user_itinerary")
-    itinerary_activities = db.relationship("Itinerary_Activities", back_populates="user_itinerary")
-    stays = db.relationship("Stays", back_populates="user_itinerary")
+    activities = db.relationship("Activities", back_populates="user_itinerary")
+    hotels = db.relationship("Hotel", back_populates="user_itinerary")
     flights = db.relationship("Flights", back_populates="user_itinerary")
     places = db.relationship("Places", back_populates="user_itinerary")
+    user = db.relationship("User", back_populates="user_itineraries")
 
 
     def __repr__(self):
@@ -78,23 +80,6 @@ class Flights(db.Model):
     def __repr__(self):
         return f"<Flights flight_id={self.flight_id} type_flight={self.type_flight}>"
     
- 
-
-class Itinerary_Activities(db.Model):
-    """Itinerary for things to do"""
-    __tablename__ = "itinerary_activities"
-
-    itinerary_activities_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    user_itinerary_id = db.Column(db.Integer, db.ForeignKey("user_itinerary.user_itinerary_id"))
-    activities_id = db.Column(db.Integer, db.ForeignKey("activities.activities_id"))
-    price = db.Column(db.Float)
-
-    user_itinerary = db.relationship("User_Itinerary", back_populates="itinerary_activities")
-    activities = db.relationship("Activities", back_populates="itinerary_activities")
-
-    def __repr__(self):
-        return f"<Itinerary_Activities itinerary_activities_id={self.itinerary_activities_id} activities={self.activities}>"
-    
 
  
 class Activities(db.Model):
@@ -105,8 +90,10 @@ class Activities(db.Model):
     name = db.Column(db.String)
     address = db.Column(db.String)
     contact_info = db.Column(db.String)
+    price = db.Column(db.Float)
+    user_itinerary_id = db.Column(db.Integer, db.ForeignKey("user_itinerary.user_itinerary_id"))
 
-    itinerary_activities = db.relationship("Itinerary_Activities", back_populates="activities")
+    user_itinerary = db.relationship("User_Itinerary", back_populates="activities")
 
     def __repr__(self):
         return f"<Activities activities_id={self.activities_id} name={self.name}>"
@@ -122,28 +109,15 @@ class Hotel(db.Model):
     location = db.Column(db.String)
     contact = db.Column(db.String)
 
-    stays = db.relationship("Stays", back_populates="hotel")
-
-    def __repr__(self):
-        return f"<Hotel hotel_id={self.hotel_id} name={self.name}>"
-    
-
-
-class Stays(db.Model):
-    """Information about the stay"""
-    __tablename__ = "stays"
-
-    stay_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    hotel_id = db.Column(db.Integer, db.ForeignKey("hotel.hotel_id"))
     user_itinerary_id = db.Column(db.Integer, db.ForeignKey("user_itinerary.user_itinerary_id"))
     price = db.Column(db.Float)
     num_nights = db.Column(db.Integer)
 
-    user_itinerary = db.relationship("User_Itinerary", back_populates="stays")
-    hotel = db.relationship("Hotel", back_populates="stays")
+    user_itinerary = db.relationship("User_Itinerary", back_populates="hotels")
 
     def __repr__(self):
-        return f"<Stays stay_id={self.stay_id} hotel={self.hotel}>"
+        return f"<Hotel hotel_id={self.hotel_id} name={self.name}>"
+    
     
 
 

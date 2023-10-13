@@ -8,13 +8,13 @@
 <h2>{{ user_itinerary.places.country }}</h2>
 
     <ul>
-    {% for stay in user_itinerary.stays %}
-        <li>Number of nights: {{stay.num_nights}} </li>
-        <li>Price: {{stay.price}}</li>
-        <li>Hotel name: {{stay.hotel.name}}</li>
+    {% for hotel in user_itinerary.hotels %}
+        <li>Number of nights: {{hotel.num_nights}} </li>
+        <li>Price: {{hotel.price}}</li>
+        <li>Hotel name: {{hotel.name}}</li>
     {% endfor %}
    </ul>
-
+ 
    <ul>
     {% for flight in user_itinerary.flights %}
         <li>Type of Flight: {{flight.type_flight}} </li>
@@ -24,15 +24,15 @@
    </ul>
 
    <ul>
-    {% for activity in user_itinerary.itinerary_activities %}
-        <li>Activity Name: {{activity.activities.name}} </li>
-        <li>Adress: {{activity.activities.address}} </li>
-        <li>Contact: {{activity.activities.contact_info}} </li>
+    {% for activity in user_itinerary.activities %}
+        <li>Activity Name: {{activity.name}} </li>
+        <li>Adress: {{activity.address}} </li>
+        <li>Contact: {{activity.contact_info}} </li>
     {% endfor %}
    </ul>
 
    
-   <h2>User Itineraries</h2>
+   
     <h2 id="delete_itinerary"></h2>
     <button id="delete_user_itinerary" value="{{user_itinerary.user_itinerary_id}}"> Delete </button>
 
