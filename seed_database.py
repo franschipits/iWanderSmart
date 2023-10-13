@@ -59,7 +59,7 @@ for place in places:
 model.db.session.add_all(list_places)
 model.db.session.commit()
 
-
+ 
 #User_Itinerary:
 user_itinerary = []
 

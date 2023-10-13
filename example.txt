@@ -1,0 +1,26 @@
+{'business_status': 'OPERATIONAL',
+  'formatted_address': '89-93 Av. Paul Vaillant Couturier, 94250 Gentilly, '
+                       'France',
+  'geometry': {'location': {'lat': 48.8162072, 'lng': 2.3382304},
+               'viewport': {'northeast': {'lat': 48.81771032989273,
+                                          'lng': 2.339646929892722},
+                            'southwest': {'lat': 48.81501067010728,
+                                          'lng': 2.336947270107277}}},
+  'icon': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
+  'icon_background_color': '#909CE1',
+  'icon_mask_base_uri': 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
+  'name': 'JO&JOE Paris Gentilly',
+  'photos': [{'height': 3994,
+              'html_attributions': ['<a '
+                                    'href="https://maps.google.com/maps/contrib/103765520192157472497">A '
+                                    'Google User</a>'],
+              'photo_reference': 'ATJ83zhdoyHlm8cXlZfuPcawiQzHu4Pr49TKoVV8G8o5kjZUK_ufxDmo6XeeiUNNrxzEL0ExDDjmdaXhHmZtOewxsTks-d0RD0yzB09Xbl0I-2w7K5la0muVN5WzV8gb6yGrjXhWMjvjKj9-8cFkjeOGIvNjuFbIDFACzcfp8g72_ho-vcSu',
+              'width': 5983}],
+  'place_id': 'ChIJVfqc7c9x5kcRS42v9lHAbBk',
+  'plus_code': {'compound_code': 'R88Q+F7 Gentilly, France',
+                'global_code': '8FW4R88Q+F7'},
+  'rating': 4.5,
+  'reference': 'ChIJVfqc7c9x5kcRS42v9lHAbBk',
+  'types': ['lodging', 'point_of_interest', 'establishment'],
+  'user_ratings_total': 2509}
+  

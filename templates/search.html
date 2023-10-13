@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %} Search Details {% endblock %}
+
+{% block body %}
+{% for result in result_list %}
+<h1>{{result['name']}}</h1>
+{{result['formatted_address']}}
+
+
+{% endfor %}
+{% endblock %}

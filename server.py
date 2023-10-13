@@ -2,12 +2,14 @@ from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
 from model import connect_to_db, db, User, User_Itinerary
 import crud
-
+import requests, json 
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+
+api_key = 'AIzaSyB958LVVLqjnoPNHpD_-I8Nqg6f_2enjd4'
 
 @app.route('/')
 def homepage():
@@ -76,22 +78,22 @@ def user_login():
     
     return redirect("/")
 
- 
+
 @app.route("/profile")
 def show_profile():
 
     user = crud.get_user_by_email(session["current_user"])
-    itineraries = Saved_Itinerary.query.filter_by(user_id=user.user_id).all()
+    #itineraries = Saved_Itinerary.query.filter_by(user_id=user.user_id).all()
     user_itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
 
-    if itineraries is None:
-        itineraries = []
+    # if itineraries is None:
+    #     itineraries = []
     
     if user_itineraries is None:
         user_itineraries = []
 
 
-    return render_template("profile.html", user=user, itineraries=itineraries, user_itineraries=user_itineraries)
+    return render_template("profile.html", user=user, user_itineraries=user_itineraries)
 
 
 @app.route("/budget_update", methods=['POST'])
@@ -152,6 +154,20 @@ def user_itineraries_details():
     itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
     
     return render_template("user_itinerary_details.html", user=user, itineraries=itineraries)
+
+
+@app.route("/search", methods=['POST'])
+def search_bar():
+
+    search = request.form['search']
+    url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
+    query = search #search is what the user typed in
+    r = requests.get(url + 'query=' + query +
+                        '&key=' + api_key) 
+    result = r.json() 
+    result_list = result['results'] 
+
+    return render_template("search.html", result_list=result_list)
 
 
 if __name__ == "__main__":

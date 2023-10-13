@@ -13,7 +13,7 @@ def create_user(user_name, email, password, budget=0):
 
     return user
 
-
+ 
 def get_users():
     """Return all users."""
 
