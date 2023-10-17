@@ -10,7 +10,7 @@
         <input type="text" id="budget" name="budget" value=""><br>
         <input type="submit" value="Submit">
         </form>
- 
+
 
    <h2>User Itineraries</h2>
    {% if user_itineraries %}
@@ -18,7 +18,7 @@
     {% for user_itinerary in user_itineraries %}
         <li>
             <a href="/user_itinerary/{{user_itinerary.user_itinerary_id}}">
-            {{user_itinerary.places.city}}
+            {{user_itinerary.name_place }}
             </a>
         </li>       
     {% endfor %}
@@ -26,8 +26,11 @@
    {% endif %}
 
 
-
+   <h2>Create New Itinerary</h2>
    <form action="/new_itinerary" method="POST">
+    <input type="text" name="new_itinerary" placeholder="Itinerary Title">
+    <button type="submit"> Create </button>
+    </form>
 
 
 

@@ -121,6 +121,16 @@ def delete_itinerary():
 
         delete_user_itinerary = request.json.get('delete_itinerary')
         del_itinerary = crud.get_user_itinerary_by_id(int(delete_user_itinerary))
+        flights = crud.get_flights_by_itinerary_id(del_itinerary.user_itinerary_id)
+        for flight in flights:
+            db.session.delete(flight)
+        hotels = crud.get_hotels_by_itinerary_id(del_itinerary.user_itinerary_id)
+        for hotel in hotels:
+            db.session.delete(hotel)
+        activities = crud.get_activities_by_itinerary_id(del_itinerary.user_itinerary_id)
+        for activity in activities:
+            db.session.delete(activity)
+        db.session.commit()
         db.session.delete(del_itinerary)
         db.session.commit()
         return jsonify({'message': 'Success!'})
@@ -167,8 +177,11 @@ def search_bar():
                         '&key=' + api_key) 
     result = r.json() 
     result_list = result['results'] 
+    user = crud.get_user_by_email(session["current_user"])
+    itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
 
-    return render_template("search.html", result_list=result_list)
+
+    return render_template("search.html", result_list=result_list, itineraries=itineraries)
 
 
 @app.route("/add_hotel", methods=['POST'])
@@ -177,12 +190,58 @@ def create_add_hotel():
     user = crud.get_user_by_email(session["current_user"])
     name = request.form['name']
     location = request.form['location']
-    user_itinerary = crud.get_user_itinerary(user)
+    user_itinerary_id = request.form['itinerary']
+    user_itinerary = crud.get_user_itinerary_by_id(user_itinerary_id) #change this to look up a specific itinerary
     hotel = crud.create_hotel(name, location, None, user_itinerary.user_itinerary_id)
     db.session.add(hotel)
     db.session.commit()
 
     return render_template("user_itinerary_details.html", user_itinerary=user_itinerary)
+
+@app.route("/new_itinerary", methods=['POST'])
+def create_new_itinerary():
+
+    user = crud.get_user_by_email(session["current_user"])
+    # creator = crud.create_user_itinerary(creator=user.user_id)
+    # places_id = crud.create_user_itinerary(places_id=places_id.places_id)
+    user_itinerary_name = request.form['new_itinerary']
+    # user_itinerary = crud.get_user_itinerary_by_id(user_itinerary_id)
+    new_itinerary = crud.create_user_itinerary(user.user_id, user_itinerary_name) #using user id and itenerary name from form
+    db.session.add(new_itinerary)
+    db.session.commit()
+
+
+    return redirect("/profile")
+    #in the html, user picks a place, form gets submitted
+    #in the server, get the user, so we can get user id, also get place by name or id
+    #then use user id and place id to create new itinerary 
+    #add and commit the new itinerary
+    # redirect to profile route
+    
+@app.route("/delete_hotel", methods=['POST'])
+def delete_hotel():
+    delete_hotel = request.json.get('delete_hotel')
+    del_hotel = crud.get_hotel_by_id(int(delete_hotel))
+    db.session.delete(del_hotel)
+    db.session.commit()
+    return jsonify({'message': 'Hotel deleted!'})
+
+
+@app.route("/delete_flight", methods=['POST'])
+def delete_flight():
+    delete_flight = request.json.get('delete_flight')
+    del_flight = crud.get_flight_by_id(int(delete_flight))
+    db.session.delete(del_flight)
+    db.session.commit()
+    return jsonify({'message': 'Flight deleted!'})
+
+@app.route("/delete_activity", methods=['POST'])
+def delete_activity():
+    delete_activity = request.json.get('delete_activity')
+    del_activity = crud.get_activities_by_id(int(delete_activity))
+    db.session.delete(del_activity)
+    db.session.commit()
+    return jsonify({'message': 'Activity deleted!'})
 
 
 if __name__ == "__main__":

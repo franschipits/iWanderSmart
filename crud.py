@@ -1,6 +1,6 @@
 """CRUD operations."""
 
-from model import db, User, User_Itinerary, Flights, Activities, Hotel, Places, connect_to_db
+from model import db, User, User_Itinerary, Flights, Activities, Hotel, connect_to_db
 def create_user(user_name, email, password, budget=0):
     """Create and return a new user."""
 
@@ -31,11 +31,11 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
-def create_user_itinerary(creator, places_id):
+def create_user_itinerary(creator, name_place):
 
     user_itinerary = User_Itinerary(
         creator=creator,
-        places_id=places_id,
+        name_place=name_place,
     )
  
     return user_itinerary
@@ -126,20 +126,43 @@ def create_hotel(name, location, contact, user_itinerary_id):
 #     )
 
 #     return stays
+ 
 
+# def create_places(country, state, city, passport, visa):
 
-def create_places(country, state, city, passport, visa):
+#     places = Places(
+#         country=country,
+#         state=state,
+#         city=city,
+#         passport=passport,
+#         visa=visa,
+#     )
 
-    places = Places(
-        country=country,
-        state=state,
-        city=city,
-        passport=passport,
-        visa=visa,
-    )
+#     return places
 
-    return places
+def get_flights_by_itinerary_id(user_itinerary_id):
 
+    return Flights.query.filter_by(user_itinerary_id=user_itinerary_id).all()
+
+def get_hotels_by_itinerary_id(user_itinerary_id):
+
+    return Hotel.query.filter_by(user_itinerary_id=user_itinerary_id).all()
+
+def get_activities_by_itinerary_id(user_itinerary_id):
+
+    return Activities.query.filter_by(user_itinerary_id=user_itinerary_id).all()
+
+def get_flight_by_id(flight_id):
+
+    return Flights.query.get(flight_id)
+
+def get_hotel_by_id(hotel_id):
+
+    return Hotel.query.get(hotel_id)
+
+def get_activity_by_id(activities_id):
+
+    return Activities.query.get(activities_id)
 
 
 if __name__ == '__main__':

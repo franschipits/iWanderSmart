@@ -31,14 +31,19 @@ class User_Itinerary(db.Model):
 
     user_itinerary_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     creator = db.Column(db.Integer, db.ForeignKey("users.user_id"))
-    places_id = db.Column(db.Integer, db.ForeignKey("places.places_id"))
+    name_place = db.Column(db.String)
+    notes = db.Column(db.Text, default="Take notes here!")
+
+
+    
+    # places_id = db.Column(db.Integer, db.ForeignKey("places.places_id"))
 
 
     # saved_itineraries = db.relationship("Saved_Itinerary", back_populates="user_itinerary")
     activities = db.relationship("Activities", back_populates="user_itinerary")
     hotels = db.relationship("Hotel", back_populates="user_itinerary")
     flights = db.relationship("Flights", back_populates="user_itinerary")
-    places = db.relationship("Places", back_populates="user_itinerary")
+    # places = db.relationship("Places", back_populates="user_itinerary")
     user = db.relationship("User", back_populates="user_itineraries")
 
 
@@ -63,7 +68,7 @@ class User_Itinerary(db.Model):
 #     def __repr__(self):
 #         return f"<Saved_Itinerary saved_itineraries_id={self.saved_itineraries_id} user_itinerary={self.user_itinerary}>"
     
-
+ 
 
 class Flights(db.Model):
     """Information about the flights"""
@@ -121,21 +126,21 @@ class Hotel(db.Model):
     
 
 
-class Places(db.Model):
-    """Information about places to go"""
-    __tablename__ = "places"
+# class Places(db.Model):
+#     """Information about places to go"""
+#     __tablename__ = "places"
 
-    places_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    country = db.Column(db.String)
-    state = db.Column(db.String)
-    city = db.Column(db.String)
-    passport = db.Column(db.Boolean)
-    visa = db.Column(db.Boolean)
+#     places_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     country = db.Column(db.String)
+#     state = db.Column(db.String)
+#     city = db.Column(db.String)
+#     passport = db.Column(db.Boolean)
+#     visa = db.Column(db.Boolean)
 
-    user_itinerary = db.relationship("User_Itinerary", back_populates="places")
+#     user_itinerary = db.relationship("User_Itinerary", back_populates="places")
 
-    def __repr__(self):
-        return f"<Places places_id={self.places_id} country={self.country}>"
+#     def __repr__(self):
+#         return f"<Places places_id={self.places_id} country={self.country}>"
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///travels", echo=True):

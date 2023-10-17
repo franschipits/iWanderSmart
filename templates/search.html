@@ -10,9 +10,12 @@
 <input type="hidden" name= "name" value="{{result['name']}}">
 <input type="hidden" name="location" value="{{result['formatted_address']}}">
 <button type="submit"> Add to itinerary </button>
+<select name="itinerary">
+    {% for itinerary in itineraries%}
+    <option value="{{itinerary.user_itinerary_id}}"> {{itinerary.name_place}} </option>
+    {% endfor %}
+</select>
 </form>
-
-
-
+ 
 {% endfor %}
 {% endblock %}

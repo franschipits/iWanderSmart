@@ -13,7 +13,7 @@ os.system('createdb travels')
 
 model.connect_to_db(server.app)
 model.db.create_all()
-
+ 
 
 #User:
 users = []
@@ -32,40 +32,40 @@ model.db.session.commit()
 
 
 #Places:
-places = [{'country':"Brazil",
-           'state':"Sao Paulo",
-           'city':"Boituva",
-           'passport':True,
-           'visa':False}, 
+# places = [{'country':"Brazil",
+#            'state':"Sao Paulo",
+#            'city':"Boituva",
+#            'passport':True,
+#            'visa':False}, 
            
-           {'country':"United States",
-            'state':"Illinois",
-            'city':"Chicago",
-            'passport':False,
-            'visa':False}, 
+#            {'country':"United States",
+#             'state':"Illinois",
+#             'city':"Chicago",
+#             'passport':False,
+#             'visa':False}, 
             
-            {'country':"United States",
-             'state':"Texas",
-             'city':"Austin",
-             'passport':False,
-             'visa':False}]
+#             {'country':"United States",
+#              'state':"Texas",
+#              'city':"Austin",
+#              'passport':False,
+#              'visa':False}]
 
-list_places = []
+# list_places = []
 
-for place in places:
-    new_place = crud.create_places(place['country'], place['state'], place['city'], place['passport'], place['visa'])
-    list_places.append(new_place)
+# for place in places:
+#     new_place = crud.create_places(place['country'], place['state'], place['city'], place['passport'], place['visa'])
+#     list_places.append(new_place)
 
-model.db.session.add_all(list_places)
-model.db.session.commit()
+# model.db.session.add_all(list_places)
+# model.db.session.commit()
 
  
 #User_Itinerary:
 user_itinerary = []
 
 for user in users:
-    current_place = choice(list_places)
-    new_itinerary = crud.create_user_itinerary(user.user_id, current_place.places_id)
+    current_place = choice(["Brazil", "Chicago", "Paris", "Austin"])
+    new_itinerary = crud.create_user_itinerary(user.user_id, current_place)
     user_itinerary.append(new_itinerary)
 
 

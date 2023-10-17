@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ user_itinerary.places.city }} - Details{% endblock %}
+{% block title %}{{ user_itinerary.name_place }} - Details{% endblock %}
 
 {% block body %}
-<h1>{{ user_itinerary.places.city }}</h1>
-<h1>{{ user_itinerary.places.state }}</h1>
-<h2>{{ user_itinerary.places.country }}</h2>
+<h1>{{ user_itinerary.name_place }}</h1>
+<h2>{{ user_itinerary.notes }}</h2>
 
     <ul>
     {% for hotel in user_itinerary.hotels %}
@@ -14,7 +13,10 @@
         <li>Hotel name: {{hotel.name}}</li>
     {% endfor %}
    </ul>
- 
+
+   <h2 id="delete_hotel"></h2>
+    <button id="delete_hotel" value="{{hotel.hotel_id}}"> Delete </button>
+
    <ul>
     {% for flight in user_itinerary.flights %}
         <li>Type of Flight: {{flight.type_flight}} </li>
@@ -23,6 +25,9 @@
     {% endfor %}
    </ul>
 
+   <h2 id="delete_flight"></h2>
+    <button id="delete_flight" value="{{flight.flight_id}}"> Delete </button>
+
    <ul>
     {% for activity in user_itinerary.activities %}
         <li>Activity Name: {{activity.name}} </li>
@@ -30,11 +35,15 @@
         <li>Contact: {{activity.contact_info}} </li>
     {% endfor %}
    </ul>
+ 
+   <h2 id="delete_activities"></h2>
+    <button id="delete_activities" value="{{activity.activities_id}}"> Delete </button>
 
-   
+
    
     <h2 id="delete_itinerary"></h2>
     <button id="delete_user_itinerary" value="{{user_itinerary.user_itinerary_id}}"> Delete </button>
+
 
 <script src="/static/delete_itinerary.js"> </script>   
 {% endblock %}
