@@ -11,39 +11,41 @@
         <li>Number of nights: {{hotel.num_nights}} </li>
         <li>Price: {{hotel.price}}</li>
         <li>Hotel name: {{hotel.name}}</li>
+    <button class="delete_hotel" id="{{hotel.hotel_id}}"> Delete </button>
     {% endfor %}
    </ul>
 
-   <h2 id="delete_hotel"></h2>
-    <button id="delete_hotel" value="{{hotel.hotel_id}}"> Delete </button>
+   
 
    <ul>
     {% for flight in user_itinerary.flights %}
         <li>Type of Flight: {{flight.type_flight}} </li>
         <li>Date/Time: {{flight.date_time}} </li>
         <li>Price: {{flight.price}} </li>
+    <button class="delete_flight" id="{{flight.flight_id}}"> Delete </button>
     {% endfor %}
    </ul>
 
-   <h2 id="delete_flight"></h2>
-    <button id="delete_flight" value="{{flight.flight_id}}"> Delete </button>
+
 
    <ul>
     {% for activity in user_itinerary.activities %}
         <li>Activity Name: {{activity.name}} </li>
         <li>Adress: {{activity.address}} </li>
         <li>Contact: {{activity.contact_info}} </li>
+    <button class="delete_activities" id="{{activity.activities_id}}"> Delete </button>
     {% endfor %}
    </ul>
  
-   <h2 id="delete_activities"></h2>
-    <button id="delete_activities" value="{{activity.activities_id}}"> Delete </button>
-
+   
 
    
     <h2 id="delete_itinerary"></h2>
     <button id="delete_user_itinerary" value="{{user_itinerary.user_itinerary_id}}"> Delete </button>
-
+ 
 
 <script src="/static/delete_itinerary.js"> </script>   
+<script src="/static/delete_hotel.js"> </script>
+<script src="/static/delete_flight.js"> </script>
+<script src="/static/delete_activity.js"> </script>
 {% endblock %}

@@ -163,7 +163,7 @@ def get_hotel_by_id(hotel_id):
 def get_activity_by_id(activities_id):
 
     return Activities.query.get(activities_id)
-
+ 
 
 if __name__ == '__main__':
     from server import app

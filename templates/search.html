@@ -6,7 +6,7 @@
 {% for result in result_list %}
 <h1>{{result['name']}}</h1>
 {{result['formatted_address']}}
-<form action="/add_hotel" method="POST">
+<form action="/add_to_itinerary" method="POST">
 <input type="hidden" name= "name" value="{{result['name']}}">
 <input type="hidden" name="location" value="{{result['formatted_address']}}">
 <button type="submit"> Add to itinerary </button>
@@ -15,7 +15,10 @@
     <option value="{{itinerary.user_itinerary_id}}"> {{itinerary.name_place}} </option>
     {% endfor %}
 </select>
+<select name="hotelxactivity">
+    <option value="hotel">Hotel</option>
+    <option value="activity">Activity</option>
+</select>
 </form>
- 
 {% endfor %}
 {% endblock %}

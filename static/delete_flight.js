@@ -19,4 +19,4 @@ button.addEventListener('click', (evt) => {
         alert('Flight deleted')
         window.location.href = '/profile'
     })
-})
+}) 

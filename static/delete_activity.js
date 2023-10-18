@@ -1,11 +1,10 @@
-const button = document.querySelector('#delete_activities');
-
-button.addEventListener('click', (evt) => {
-    
+const deleteActivityButtons = document.querySelectorAll('button.delete_activities');
+for (const deleteActivityButton of deleteActivityButtons) {
+deleteActivityButton.addEventListener('click', (evt) => {
     const formAnswer = {
-        delete_activities: evt.target.value
-    };
+        delete_activities: evt.target.id
 
+    }
     fetch('/delete_activity', {
         method: 'POST',
         body: JSON.stringify(formAnswer),
@@ -16,7 +15,8 @@ button.addEventListener('click', (evt) => {
 
     .then((response) => response.json())
     .then((responseJSON) => {
-        alert('Activity deleted')
+        alert('Ativity deleted')
         window.location.href = '/profile'
     })
-})
+});
+}

@@ -16,7 +16,7 @@ button.addEventListener('click', (evt) => {
 
     .then((response) => response.json())
     .then((responseJSON) => {
-        alert('itinerary deleted')
+        alert('Itinerary deleted')
         window.location.href = '/profile'
     })
 })

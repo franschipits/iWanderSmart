@@ -6,7 +6,7 @@
   
 # importing required modules 
 import requests, json 
-  
+
 # enter your api key here 
 api_key = 'AIzaSyB958LVVLqjnoPNHpD_-I8Nqg6f_2enjd4'
   
