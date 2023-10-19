@@ -3,13 +3,14 @@
 
 {% block body %}
    <h1>{{ user.user_name }}</h1>
+   
    <h2>Budget</h2>
     <h2 id="user_budget"> {{ user.budget }}</h2>
     <form id="budget_update">
         <label for="budget">Update Budget:</label><br>
         <input type="text" id="budget" name="budget" value=""><br>
         <input type="submit" value="Submit">
-        </form>
+    </form>
 
 
    <h2>User Itineraries</h2>
@@ -24,12 +25,20 @@
     {% endfor %}
    </ul>
    {% endif %}
- 
+  
 
    <h2>Create New Itinerary</h2>
    <form action="/new_itinerary" method="POST">
     <input type="text" name="new_itinerary" placeholder="Itinerary Title">
     <button type="submit"> Create </button>
+    </form>
+
+
+
+    <form action="/logout" method="POST">
+      <p>
+        <button type="submit"> Logout </button>
+      </p>
     </form>
 
 

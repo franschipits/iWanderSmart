@@ -2,7 +2,7 @@ const deleteActivityButtons = document.querySelectorAll('button.delete_activitie
 for (const deleteActivityButton of deleteActivityButtons) {
 deleteActivityButton.addEventListener('click', (evt) => {
     const formAnswer = {
-        delete_activities: evt.target.id
+        delete_activity: evt.target.id
 
     }
     fetch('/delete_activity', {
@@ -15,8 +15,9 @@ deleteActivityButton.addEventListener('click', (evt) => {
 
     .then((response) => response.json())
     .then((responseJSON) => {
-        alert('Ativity deleted')
+        alert('Activity deleted')
         window.location.href = '/profile'
     })
 });
 }
+

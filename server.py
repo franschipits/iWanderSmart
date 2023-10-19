@@ -79,21 +79,36 @@ def user_login():
     return redirect("/")
 
 
+@app.route("/logout", methods=['POST'])
+def user_logout():
+
+    if session.get('current_user'):
+        del session['current_user']
+    flash('You have successfully logged yourself out!')
+    return redirect("/")
+
+
 @app.route("/profile")
 def show_profile():
 
-    user = crud.get_user_by_email(session["current_user"])
-    #itineraries = Saved_Itinerary.query.filter_by(user_id=user.user_id).all()
-    user_itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
-
-    # if itineraries is None:
-    #     itineraries = []
+    if 'current_user' not in session:
+        flash("Please log in")
+        return redirect("/")
     
-    if user_itineraries is None:
-        user_itineraries = []
+    else:
+        user = crud.get_user_by_email(session["current_user"])
+        
+        #itineraries = Saved_Itinerary.query.filter_by(user_id=user.user_id).all()
+        user_itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
+
+        # if itineraries is None:
+        #     itineraries = []
+        
+        if user_itineraries is None:
+            user_itineraries = []
 
 
-    return render_template("profile.html", user=user, user_itineraries=user_itineraries)
+        return render_template("profile.html", user=user, user_itineraries=user_itineraries)
 
 
 @app.route("/budget_update", methods=['POST'])
@@ -105,6 +120,18 @@ def show_budget():
     db.session.commit()
     print(user.budget)
     return jsonify({'budget': budget})    
+
+
+@app.route("/notes_update", methods=['POST'])
+def show_notes():
+
+    notes = request.json.get('new_note')
+    user = crud.get_user_by_email(session["current_user"])
+    user_itinerary = crud.get_user_itinerary(user)
+    user_itinerary.notes = notes
+    db.session.commit()
+    print(user_itinerary.notes)
+    return jsonify({'notes': notes})   
 
 
 @app.route("/user_itinerary")
@@ -205,6 +232,24 @@ def create_add_hotel():
     return render_template("user_itinerary_details.html", user_itinerary=user_itinerary)
 
 
+@app.route("/add_flight", methods=['POST'])
+def create_add_flight():
+
+    user = crud.get_user_by_email(session["current_user"])
+    type_flight = request.json.get('type_flight')
+    date_time = request.json.get('date_time')
+    price = request.json.get('price')
+    user_itinerary_id = request.json.get('itinerary_to_add_to')
+    flight = crud.create_flights(user_itinerary_id, type_flight, date_time, price)
+    db.session.add(flight)
+    db.session.commit()
+    print("This is the new flight")
+    print(flight)
+    return jsonify({'message':'Flight added!', 'type_flight': type_flight, 'date_time': date_time, 'price': price, 'flight_id': flight.flight_id})
+
+
+
+
 @app.route("/new_itinerary", methods=['POST'])
 def create_new_itinerary():
 
@@ -242,10 +287,11 @@ def delete_flight():
     db.session.commit()
     return jsonify({'message': 'Flight deleted!'})
 
+
 @app.route("/delete_activity", methods=['POST'])
 def delete_activity():
-    delete_activity = request.json.get('delete_activity')
-    del_activity = crud.get_activities_by_id(int(delete_activity))
+    activity_to_delete_id = request.json.get('delete_activity')
+    del_activity = crud.get_activity_by_id(int(activity_to_delete_id))
     db.session.delete(del_activity)
     db.session.commit()
     return jsonify({'message': 'Activity deleted!'})

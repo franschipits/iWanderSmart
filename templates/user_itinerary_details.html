@@ -4,8 +4,31 @@
 
 {% block body %}
 <h1>{{ user_itinerary.name_place }}</h1>
-<h2>{{ user_itinerary.notes }}</h2>
 
+    
+    <h2 id="user_notes"> {{ user_itinerary.notes }}</h2>
+    <form id="notes_update">
+        <label for="notes">Notes:</label><br>
+        <input type="text" id="notes" name="notes" value=""><br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <h2>Flights:</h2>
+    <ul id="flight_results">
+    {% for flight in user_itinerary.flights %}
+    <div>
+        <li>Type of Flight: {{flight.type_flight}} </li>
+        <li>Date/Time: {{flight.date_time}} </li>
+        <li>Price: {{flight.price}} </li>
+    <button class="delete_flight" id="{{flight.flight_id}}"> Delete </button>
+    </div>
+    {% endfor %}
+   </ul>
+
+
+
+    <h2>Hotels:</h2>
     <ul>
     {% for hotel in user_itinerary.hotels %}
         <li>Number of nights: {{hotel.num_nights}} </li>
@@ -16,18 +39,7 @@
    </ul>
 
    
-
-   <ul>
-    {% for flight in user_itinerary.flights %}
-        <li>Type of Flight: {{flight.type_flight}} </li>
-        <li>Date/Time: {{flight.date_time}} </li>
-        <li>Price: {{flight.price}} </li>
-    <button class="delete_flight" id="{{flight.flight_id}}"> Delete </button>
-    {% endfor %}
-   </ul>
-
-
-
+   <h2>Activities:</h2>
    <ul>
     {% for activity in user_itinerary.activities %}
         <li>Activity Name: {{activity.name}} </li>
@@ -42,10 +54,35 @@
    
     <h2 id="delete_itinerary"></h2>
     <button id="delete_user_itinerary" value="{{user_itinerary.user_itinerary_id}}"> Delete </button>
- 
+
+
+
+<h2>Flight Information</h2>
+<form id="flight_info">
+    <input type="hidden" id="itinerary_to_add_to" value="{{user_itinerary.user_itinerary_id}}">
+    <label for="flight_type">Flight Type:</label>
+    <select id="type_flight" name="flight_type">
+        <option value="Departure">Departure</option>
+        <option value="Return">Return</option>
+    </select>
+    
+        <br>
+        <label for="date_and_time">Date and Time:</label><br>
+        <input type="datetime-local" id="date_time" name="date_time" value=""><br>
+   
+
+        <br>
+        <label for="price_flight">Flight Price:</label><br>
+        <input type="number" id="price" name="price" value=""><br>
+   
+
+    <button type="submit"> Add to itinerary </button>
+
+</form>
+
 
 <script src="/static/delete_itinerary.js"> </script>   
 <script src="/static/delete_hotel.js"> </script>
-<script src="/static/delete_flight.js"> </script>
+<script src="/static/flight.js"> </script>
 <script src="/static/delete_activity.js"> </script>
 {% endblock %}
