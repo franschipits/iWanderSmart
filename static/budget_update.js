@@ -21,3 +21,4 @@ form.addEventListener('submit', (evt) => {
         h2.innerHTML = responseJSON['budget'];
     })
 })
+ 

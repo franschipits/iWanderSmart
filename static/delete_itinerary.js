@@ -20,3 +20,4 @@ button.addEventListener('click', (evt) => {
         window.location.href = '/profile'
     })
 })
+ 

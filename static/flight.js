@@ -38,7 +38,7 @@ for (const deleteFlightButton of deleteFlightButtons) {
 deleteFlightButton.addEventListener('click', (evt) => {
     const formAnswer = {
         delete_flight: evt.target.id
-
+ 
     }
     fetch('/delete_flight', {
         method: 'POST',
@@ -51,7 +51,7 @@ deleteFlightButton.addEventListener('click', (evt) => {
     .then((response) => response.json())
     .then((responseJSON) => {
         alert('Flight deleted')
-        window.location.href = '/profile'
+        window.location.href = "/profile"
     })
 });
 }

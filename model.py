@@ -34,7 +34,7 @@ class User_Itinerary(db.Model):
     name_place = db.Column(db.String)
     notes = db.Column(db.Text, default="Take notes here!")
 
-
+ 
     
     # places_id = db.Column(db.Integer, db.ForeignKey("places.places_id"))
 

@@ -39,7 +39,7 @@ def create_user_itinerary(creator, name_place):
     )
  
     return user_itinerary
-
+ 
 
 def get_user_itinerary(user):
     """Return all user itineraries."""
@@ -104,13 +104,15 @@ def create_activities(name, address, contact_info, user_itinerary_id):
     return activities
 
 
-def create_hotel(name, location, contact, user_itinerary_id):
+def create_hotel(name, location, contact, user_itinerary_id, num_nights, price):
 
     hotel = Hotel(
         name=name,
         location=location,
         contact=contact,
         user_itinerary_id=user_itinerary_id,
+        num_nights=num_nights,
+        price=price,
     )
 
     return hotel

@@ -125,14 +125,14 @@ def show_budget():
 @app.route("/notes_update", methods=['POST'])
 def show_notes():
 
-    notes = request.json.get('new_note')
-    user = crud.get_user_by_email(session["current_user"])
-    user_itinerary = crud.get_user_itinerary(user)
+    notes = request.json.get('new_notes')
+    note_update = request.json.get('note_update')
+    user_itinerary = crud.get_user_itinerary_by_id(int(note_update))
     user_itinerary.notes = notes
     db.session.commit()
     print(user_itinerary.notes)
     return jsonify({'notes': notes})   
-
+ 
 
 @app.route("/user_itinerary")
 def all_user_itineraries():
@@ -168,8 +168,25 @@ def show_user_itinerary(user_itinerary_id):
     """"Show details on a particular itinerary"""
 
     user_itinerary = crud.get_user_itinerary_by_id(user_itinerary_id)
+    flight_total = 0
+    for flight in user_itinerary.flights:
+        flight_total += flight.price
+    hotel_total = 0
+    nights_total = 0
+    for hotel in user_itinerary.hotels:
+        nights_total += hotel.num_nights
+        hotel_total += hotel.price
+    
+    remaining_budget = user_itinerary.user.budget - flight_total - hotel_total
+    budget_per_day = remaining_budget / nights_total
+    daily_budget = {'flight_total': flight_total,
+                    'hotel_total': hotel_total,
+                    'nights_total': nights_total,
+                    'remaining_budget': remaining_budget,
+                    'budget_per_day': budget_per_day,
+                    }
 
-    return render_template("user_itinerary_details.html", user_itinerary=user_itinerary)
+    return render_template("user_itinerary_details.html", user_itinerary=user_itinerary, daily_budget=daily_budget)
 
  
 #VIEW ITINERARIES THAT USER CREATED AFTER USER LOG IN:
@@ -218,10 +235,12 @@ def create_add_hotel():
     name = request.form['name']
     location = request.form['location']
     user_itinerary_id = request.form['itinerary']
+    num_nights = request.form['number_nights']
+    price = request.form['price_hotel']
     user_itinerary = crud.get_user_itinerary_by_id(user_itinerary_id) #change this to look up a specific itinerary
     hotelxactivity = request.form['hotelxactivity']
     if hotelxactivity == 'hotel':
-        hotel = crud.create_hotel(name, location, None, user_itinerary.user_itinerary_id)
+        hotel = crud.create_hotel(name, location, None, user_itinerary.user_itinerary_id, num_nights, price)
         db.session.add(hotel)
         db.session.commit()
     else: 

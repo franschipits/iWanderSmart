@@ -1,11 +1,12 @@
-const form = document.querySelector('#notes_update');
-const h2 = document.querySelector('#user_notes');
+const notes_form = document.querySelector('#notes_update');
+const notes_h2 = document.querySelector('#user_notes');
 
-form.addEventListener('submit', (evt) => {
+notes_form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const formAnswer = {
-        new_notes: document.querySelector('#notes').value
+        new_notes: document.querySelector('#notes').value,
+        note_update: document.querySelector('#note_update_itin_id').value
     };
 
     fetch('/notes_update', {
@@ -18,6 +19,6 @@ form.addEventListener('submit', (evt) => {
 
     .then((response) => response.json())
     .then((responseJSON) => {
-        h2.innerHTML = responseJSON['notes'];
+        notes_h2.innerHTML = responseJSON.notes;
     })
 })

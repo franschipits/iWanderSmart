@@ -5,15 +5,21 @@
 {% block body %}
 <h1>{{ user_itinerary.name_place }}</h1>
 
+<h2>Budget</h2>
+    <h2 id="user_budget"> {{ user_itinerary.user.budget }}</h2>
+<h3>{{daily_budget.remaining_budget}} Remaning Budget after flights and hotel</h3>
+<h3>{{daily_budget.budget_per_day}} Daily Budget </h3>
+
     
     <h2 id="user_notes"> {{ user_itinerary.notes }}</h2>
     <form id="notes_update">
+        <input type="hidden" id="note_update_itin_id" value="{{user_itinerary.user_itinerary_id}}">
         <label for="notes">Notes:</label><br>
-        <input type="text" id="notes" name="notes" value=""><br>
+        <input type="text" id="notes" name="notes"><br>
         <input type="submit" value="Submit">
     </form>
 
-
+ 
     <h2>Flights:</h2>
     <ul id="flight_results">
     {% for flight in user_itinerary.flights %}
@@ -70,8 +76,7 @@
         <label for="date_and_time">Date and Time:</label><br>
         <input type="datetime-local" id="date_time" name="date_time" value=""><br>
    
-
-        <br>
+        
         <label for="price_flight">Flight Price:</label><br>
         <input type="number" id="price" name="price" value=""><br>
    
@@ -85,4 +90,5 @@
 <script src="/static/delete_hotel.js"> </script>
 <script src="/static/flight.js"> </script>
 <script src="/static/delete_activity.js"> </script>
+<script src="/static/notes.js"> </script>
 {% endblock %}
