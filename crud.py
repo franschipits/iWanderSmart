@@ -39,7 +39,7 @@ def create_user_itinerary(creator, name_place):
     )
  
     return user_itinerary
- 
+
 
 def get_user_itinerary(user):
     """Return all user itineraries."""
@@ -117,6 +117,10 @@ def create_hotel(name, location, contact, user_itinerary_id, num_nights, price):
 
     return hotel
  
+
+
+
+
 
 # def create_stays(hotel_id, user_itinerary_id, price, num_nights):
 

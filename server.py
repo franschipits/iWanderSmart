@@ -106,6 +106,24 @@ def show_profile():
         
         if user_itineraries is None:
             user_itineraries = []
+    
+        for user_itinerary in user_itineraries:
+            flight_total = 0
+            for flight in user_itinerary.flights:
+                flight_total += flight.price
+            hotel_total = 0
+            nights_total = 0
+            for hotel in user_itinerary.hotels:
+                nights_total += hotel.num_nights
+                hotel_total += hotel.price
+    
+            remaining_budget = user_itinerary.user.budget - flight_total - hotel_total
+            if nights_total == 0:
+                budget_per_day = ""
+            else:
+                budget_per_day = remaining_budget / nights_total
+            user_itinerary.nights = nights_total
+            user_itinerary.budget_per_day = budget_per_day
 
 
         return render_template("profile.html", user=user, user_itineraries=user_itineraries)

@@ -11,7 +11,7 @@
         <input type="text" id="budget" name="budget" value=""><br>
         <input type="submit" value="Submit">
     </form>
-
+ 
  
    <h2>User Itineraries</h2>
    {% if user_itineraries %}
@@ -19,7 +19,7 @@
     {% for user_itinerary in user_itineraries %}
         <li>
             <a href="/user_itinerary/{{user_itinerary.user_itinerary_id}}">
-            {{user_itinerary.name_place }}
+            {{user_itinerary.name_place }} - Number of nights:{{user_itinerary.nights}} - Budget per day:{{user_itinerary.budget_per_day}}
             </a>
         </li>       
     {% endfor %}
