@@ -22,7 +22,7 @@ class User(db.Model):
         """Show info about the user"""
 
         return f"<User user_id={self.user_id} name={self.user_name}>"
-
+ 
 
 
 class User_Itinerary(db.Model):
@@ -143,7 +143,7 @@ class Hotel(db.Model):
 #         return f"<Places places_id={self.places_id} country={self.country}>"
 
 
-def connect_to_db(flask_app, db_uri="postgresql:///travels", echo=True):
+def connect_to_db(flask_app, db_uri="postgresql:///travels", echo=False):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

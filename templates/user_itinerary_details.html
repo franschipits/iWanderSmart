@@ -18,7 +18,7 @@
         <input type="text" id="notes" name="notes"><br>
         <input type="submit" value="Submit">
     </form>
-
+ 
  
     <h2>Flights:</h2>
     <ul id="flight_results">
@@ -60,6 +60,17 @@
    
     <h2 id="delete_itinerary"></h2>
     <button id="delete_user_itinerary" value="{{user_itinerary.user_itinerary_id}}"> Delete </button>
+
+
+<h2>Restaurant Suggestions based on daily budget:</h2>
+<ul>
+{% for result in result_list %}
+<li>Restaurant Name:{{result['name']}}</li>
+<li>Adress: {{result['formatted_address']}}</li>
+<li>Price Level: {{result['price_level']}}</li>
+<li>Rating: {{result['rating']}}</li><br>
+{% endfor %}
+</ul>
 
 
 

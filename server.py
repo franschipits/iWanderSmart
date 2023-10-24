@@ -124,7 +124,7 @@ def show_profile():
                 budget_per_day = remaining_budget / nights_total
             user_itinerary.nights = nights_total
             user_itinerary.budget_per_day = budget_per_day
-
+ 
 
         return render_template("profile.html", user=user, user_itineraries=user_itineraries)
 
@@ -196,15 +196,40 @@ def show_user_itinerary(user_itinerary_id):
         hotel_total += hotel.price
     
     remaining_budget = user_itinerary.user.budget - flight_total - hotel_total
-    budget_per_day = remaining_budget / nights_total
+    if nights_total == 0:
+        budget_per_day = ""
+    else:
+        budget_per_day = remaining_budget / nights_total
     daily_budget = {'flight_total': flight_total,
                     'hotel_total': hotel_total,
                     'nights_total': nights_total,
                     'remaining_budget': remaining_budget,
                     'budget_per_day': budget_per_day,
                     }
+    
+    name_place = user_itinerary.name_place
+    restaurants_place = f"Restaurants in {name_place}"
+    
+   
+    url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
+    query = restaurants_place
+    r = requests.get(url + 'query=' + query +
+                        '&key=' + api_key) 
+    result = r.json() 
+    result_list = result['results']
+    
+    price_level_restaurant = []
+    for result in result_list:
+        if budget_per_day < 100:
+            if 'price_level' in result and result['price_level'] <= 2:
+                price_level_restaurant.append(result)
+        else:
+            price_level_restaurant.append(result)
 
-    return render_template("user_itinerary_details.html", user_itinerary=user_itinerary, daily_budget=daily_budget)
+    
+
+
+    return render_template("user_itinerary_details.html", user_itinerary=user_itinerary, daily_budget=daily_budget, result_list=price_level_restaurant)
 
  
 #VIEW ITINERARIES THAT USER CREATED AFTER USER LOG IN:
@@ -266,7 +291,7 @@ def create_add_hotel():
         db.session.add(activity)
         db.session.commit()
 
-    return render_template("user_itinerary_details.html", user_itinerary=user_itinerary)
+    return redirect (f"/user_itinerary/{user_itinerary_id}")
 
 
 @app.route("/add_flight", methods=['POST'])
