@@ -223,10 +223,12 @@ def show_user_itinerary(user_itinerary_id):
         if budget_per_day < 100:
             if 'price_level' in result and result['price_level'] <= 2:
                 price_level_restaurant.append(result)
+                
         else:
             price_level_restaurant.append(result)
+        
 
-    
+        
 
 
     return render_template("user_itinerary_details.html", user_itinerary=user_itinerary, daily_budget=daily_budget, result_list=price_level_restaurant)

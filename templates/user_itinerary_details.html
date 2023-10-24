@@ -67,7 +67,7 @@
 {% for result in result_list %}
 <li>Restaurant Name:{{result['name']}}</li>
 <li>Adress: {{result['formatted_address']}}</li>
-<li>Price Level: {{result['price_level']}}</li>
+<li>Price Level: {{result.get('price_level')}}</li>
 <li>Rating: {{result['rating']}}</li><br>
 {% endfor %}
 </ul>
