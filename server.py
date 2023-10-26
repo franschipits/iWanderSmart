@@ -161,6 +161,31 @@ def all_user_itineraries():
     return render_template("all_user_itinerary.html", user_itinerary=user_itinerary)
 
 
+@app.route("/save_itinerary", methods=['POST'])
+def save_itinerary():
+    """Save itinerary from other users to profile"""
+
+    creator = crud.get_user_by_email(session["current_user"]).user_id
+    name_place = request.json.get('name_place')
+    print("this is the name", name_place)
+    save_hotels = request.json.get('save_hotels')
+    save_activities = request.json.get('save_activities')
+    itinerary_to_save = request.json.get('itinerary_to_save')
+    saved_itinerary = crud.create_user_itinerary(creator, name_place)
+    original_itinerary = crud.get_user_itinerary_by_id(itinerary_to_save)
+    db.session.add(saved_itinerary)
+    db.session.commit()
+    print(saved_itinerary)
+    for hotel in original_itinerary.hotels:
+        new_hotel = crud.create_hotel(hotel.name, hotel.location, hotel.contact, saved_itinerary.user_itinerary_id, hotel.num_nights, hotel.price)
+        new_hotel.num_nights = hotel.num_nights
+        db.session.add(new_hotel)
+    db.session.commit()
+
+    print("Itinerary saved to profile")
+    return jsonify({'message':'Itinerary saved!', 'save_name_place': name_place, 'save_hotels': save_hotels, 'save_activities': save_activities, 'itinerary_to_save': itinerary_to_save})
+
+
 @app.route("/delete_itinerary", methods=['POST'])
 def delete_itinerary():
 
@@ -192,8 +217,10 @@ def show_user_itinerary(user_itinerary_id):
     hotel_total = 0
     nights_total = 0
     for hotel in user_itinerary.hotels:
-        nights_total += hotel.num_nights
-        hotel_total += hotel.price
+        if hotel.num_nights:
+            nights_total += hotel.num_nights
+        if hotel.price:
+            hotel_total += hotel.price
     
     remaining_budget = user_itinerary.user.budget - flight_total - hotel_total
     if nights_total == 0:
@@ -220,7 +247,7 @@ def show_user_itinerary(user_itinerary_id):
     
     price_level_restaurant = []
     for result in result_list:
-        if budget_per_day < 100:
+        if budget_per_day != "" and budget_per_day < 100:
             if 'price_level' in result and result['price_level'] <= 2:
                 price_level_restaurant.append(result)
                 

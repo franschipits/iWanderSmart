@@ -10,9 +10,21 @@
             <a href="/user_itinerary/{{itinerary.user_itinerary_id}}">
                 {{itinerary.user_itinerary_id}}
             </a>
+        <h2>{{itinerary.name_place}}</h2>
+        <h2>{{itinerary.hotels}}</h2>
+        <h2>{{itinerary.activities}}</h2>
         </li>
-
+        
+        <form class="save_itinerary">
+            <input type="hidden" id="itinerary_to_save" value="{{itinerary.user_itinerary_id}}">
+            <input type="hidden" id="save_name_place" value="{{itinerary.name_place}}">
+            <input type="hidden" id="save_hotels" value="{{itinerary.hotels}}">
+            <input type="hidden" id="save_activities" value="{{itinerary.activities}}">
+            <button type="submit"> Save itinerary </button>
+        </form>
     {% endfor %}
     </ul>
+
+<script src="/static/save_itinerary.js"> </script>  
 {% endblock %}
  
