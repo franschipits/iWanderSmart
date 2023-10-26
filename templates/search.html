@@ -4,7 +4,10 @@
 
 {% block body %}
 {% for result in result_list %}
-<h1>{{result['name']}}</h1>
+<h1>
+    <a href="{{extract_url(result['photos'][0]['html_attributions'][0])}}" target="_blank">{{result['name']}} </a>
+</h1>
+
 {{result['formatted_address']}}
 <form action="/add_to_itinerary" method="POST">
 <input type="hidden" name= "name" value="{{result['name']}}">

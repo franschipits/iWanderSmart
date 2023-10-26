@@ -181,6 +181,10 @@ def save_itinerary():
         new_hotel.num_nights = hotel.num_nights
         db.session.add(new_hotel)
     db.session.commit()
+    for activity in original_itinerary.activities:
+        new_activity = crud.create_activities(activity.name, activity.address, activity.contact_info, saved_itinerary.user_itinerary_id)
+        db.session.add(new_activity)
+    db.session.commit()
 
     print("Itinerary saved to profile")
     return jsonify({'message':'Itinerary saved!', 'save_name_place': name_place, 'save_hotels': save_hotels, 'save_activities': save_activities, 'itinerary_to_save': itinerary_to_save})
@@ -253,7 +257,7 @@ def show_user_itinerary(user_itinerary_id):
                 
         else:
             price_level_restaurant.append(result)
-        
+    price_level_restaurant.sort(key=lambda d: d.get('price_level', 0))    
 
         
 
@@ -285,6 +289,13 @@ def user_itineraries_details():
 
 @app.route("/search", methods=['POST'])
 def search_bar():
+    def extract_url(string):
+        first_quote = string.find('"')
+        string = string[first_quote + 1:]
+        second_quote = string.find('"')
+        string = string[:second_quote]
+
+        return string
 
     search = request.form['search']
     url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
@@ -297,7 +308,7 @@ def search_bar():
     itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
 
 
-    return render_template("search.html", result_list=result_list, itineraries=itineraries)
+    return render_template("search.html", result_list=result_list, itineraries=itineraries, extract_url=extract_url)
 
 
 @app.route("/add_to_itinerary", methods=['POST'])

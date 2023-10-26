@@ -20,11 +20,8 @@ for(const form of forms) {
 
     .then((response) => response.json())
     .then((responseJSON) => {
-        document.querySelector('#save_itinerary')
-        .insertAdjacentHTML('beforeend', 
-        `<li>${responseJSON.save_name_place} </li>
-        <li>${responseJSON.save_hotels} </li>
-        <li>${responseJSON.save_activities} </li>`)
+        form.insertAdjacentHTML('beforeend', 
+        "<li> Itinerary Saved Successfully! </li>")
     })
 
 });

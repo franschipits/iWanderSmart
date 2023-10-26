@@ -7,12 +7,27 @@
     <ul> 
     {% for itinerary in user_itinerary %}
         <li> 
+        <h2>
             <a href="/user_itinerary/{{itinerary.user_itinerary_id}}">
-                {{itinerary.user_itinerary_id}}
-            </a>
-        <h2>{{itinerary.name_place}}</h2>
-        <h2>{{itinerary.hotels}}</h2>
-        <h2>{{itinerary.activities}}</h2>
+            {{itinerary.name_place}}
+        </a>
+        </h2>
+        
+        <h2>Hotels:</h2>
+        <ul>
+        {% for hotel in itinerary.hotels %}
+            <li>Hotel name: {{hotel.name}}</li>
+        {% endfor %}
+        </ul>
+
+        <h2>Activities:</h2>
+        <ul>
+        {% for activity in itinerary.activities %}
+            <li>Activity Name: {{activity.name}} </li>
+            <li>Adress: {{activity.address}} </li>
+            <li>Contact: {{activity.contact_info}} </li>
+        {% endfor %}
+        </ul>
         </li>
         
         <form class="save_itinerary">
