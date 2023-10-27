@@ -123,6 +123,7 @@ def show_profile():
             else:
                 budget_per_day = remaining_budget / nights_total
             user_itinerary.nights = nights_total
+            budget_per_day = round(budget_per_day, 2)
             user_itinerary.budget_per_day = budget_per_day
  
 
@@ -231,6 +232,7 @@ def show_user_itinerary(user_itinerary_id):
         budget_per_day = ""
     else:
         budget_per_day = remaining_budget / nights_total
+        budget_per_day = round(budget_per_day, 2)
     daily_budget = {'flight_total': flight_total,
                     'hotel_total': hotel_total,
                     'nights_total': nights_total,
@@ -318,14 +320,20 @@ def create_add_hotel():
     name = request.form['name']
     location = request.form['location']
     user_itinerary_id = request.form['itinerary']
-    num_nights = request.form['number_nights']
-    price = request.form['price_hotel']
+    num_nights = request.form['number_nights'] or 0
+    print('this is the type of num_nights')
+    print(type(num_nights))
+    price = request.form['price_hotel'] or 0
+    print('this is the type of price')
+    print(type(price))
     user_itinerary = crud.get_user_itinerary_by_id(user_itinerary_id) #change this to look up a specific itinerary
     hotelxactivity = request.form['hotelxactivity']
     if hotelxactivity == 'hotel':
         hotel = crud.create_hotel(name, location, None, user_itinerary.user_itinerary_id, num_nights, price)
         db.session.add(hotel)
         db.session.commit()
+    elif hotelxactivity == 'unselected':
+        flash('Please fill out our required fields')
     else: 
         activity = crud.create_activities(name, location, None, user_itinerary.user_itinerary_id)
         db.session.add(activity)
@@ -350,7 +358,7 @@ def create_add_flight():
     return jsonify({'message':'Flight added!', 'type_flight': type_flight, 'date_time': date_time, 'price': price, 'flight_id': flight.flight_id})
 
 
-
+ 
 
 @app.route("/new_itinerary", methods=['POST'])
 def create_new_itinerary():

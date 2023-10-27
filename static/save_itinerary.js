@@ -20,11 +20,11 @@ for(const form of forms) {
 
     .then((response) => response.json())
     .then((responseJSON) => {
-        form.insertAdjacentHTML('beforeend', 
-        "<li> Itinerary Saved Successfully! </li>")
+        form.insertAdjacentHTML(
+        alert('Itinerary Saved Successfully!'),
+        window.location.href = '/profile')
     })
 
 });
 }
 
- 

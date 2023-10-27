@@ -123,7 +123,7 @@ class Hotel(db.Model):
     def __repr__(self):
         return f"<Hotel hotel_id={self.hotel_id} name={self.name}>"
     
-    
+
 
 
 # class Places(db.Model):
