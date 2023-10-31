@@ -103,7 +103,7 @@ class Activities(db.Model):
     def __repr__(self):
         return f"<Activities activities_id={self.activities_id} name={self.name}>"
 
-
+ 
 
 class Hotel(db.Model):
     """Information about specific hotel"""

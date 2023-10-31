@@ -150,21 +150,27 @@ model.db.session.commit()
 #Hotels:
 hotels = [{'name':"Hotel Inn",
            'location':"123 Hotel Inn Street",
-           'contact': "hotelinn@contact.com"}, 
+           'contact': "hotelinn@contact.com",
+           'num_nights': 4,
+           'price': 500}, 
            
            {'name':"Holiday Hotel",
            'location':"123 Holiday Hotel Street",
-           'contact': "holidayhotel@contact.com"}, 
+           'contact': "holidayhotel@contact.com",
+           'num_nights': 2,
+           'price': 250}, 
             
             {'name':"Mountain Lodge",
            'location':"123 Mountain Lodge Street",
-           'contact': "mountainlodge@contact.com"}, 
+           'contact': "mountainlodge@contact.com",
+           'num_nights': 4,
+           'price': 650}, 
            ]
 
 list_hotels = []
 
 for hotel in hotels:
-    new_hotel = crud.create_hotel(hotel['name'], hotel['location'], hotel['contact'], user_itinerary[1].user_itinerary_id)
+    new_hotel = crud.create_hotel(hotel['name'], hotel['location'], hotel['contact'], user_itinerary[1].user_itinerary_id, hotel['num_nights'], hotel['price'])
     list_hotels.append(new_hotel)
 
 model.db.session.add_all(list_hotels)

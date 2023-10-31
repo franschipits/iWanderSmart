@@ -1,0 +1,26 @@
+a, h4 {
+    font-family: sans-serif;
+    color: #143109;
+}
+
+h2, label {
+    font-family: sans-serif;
+    color: #7C6C77;
+}
+
+h3, h1 {
+    font-family: sans-serif;
+    color: #F6AE2D;
+}
+
+
+body {
+    font-family: sans-serif;
+    position: relative;
+    background-color: #F7F7F7;
+  }
+
+.navbar-brand {
+    font-family: sans-serif;
+    color: #CC7E85
+}

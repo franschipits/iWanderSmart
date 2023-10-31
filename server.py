@@ -119,9 +119,8 @@ def show_profile():
     
             remaining_budget = user_itinerary.user.budget - flight_total - hotel_total
             if nights_total == 0:
-                budget_per_day = ""
-            else:
-                budget_per_day = remaining_budget / nights_total
+                nights_total = 1
+            budget_per_day = remaining_budget / nights_total
             user_itinerary.nights = nights_total
             budget_per_day = round(budget_per_day, 2)
             user_itinerary.budget_per_day = budget_per_day
@@ -229,10 +228,9 @@ def show_user_itinerary(user_itinerary_id):
     
     remaining_budget = user_itinerary.user.budget - flight_total - hotel_total
     if nights_total == 0:
-        budget_per_day = ""
-    else:
-        budget_per_day = remaining_budget / nights_total
-        budget_per_day = round(budget_per_day, 2)
+        nights_total = 1
+    budget_per_day = remaining_budget / nights_total
+    budget_per_day = round(budget_per_day, 2)
     daily_budget = {'flight_total': flight_total,
                     'hotel_total': hotel_total,
                     'nights_total': nights_total,
@@ -242,7 +240,7 @@ def show_user_itinerary(user_itinerary_id):
     
     name_place = user_itinerary.name_place
     restaurants_place = f"Restaurants in {name_place}"
-    
+     
    
     url = "https://maps.googleapis.com/maps/api/place/textsearch/json?"
     query = restaurants_place
@@ -306,6 +304,9 @@ def search_bar():
                         '&key=' + api_key) 
     result = r.json() 
     result_list = result['results'] 
+    if 'current_user' not in session:
+        flash("Please log in")
+        return redirect("/")
     user = crud.get_user_by_email(session["current_user"])
     itineraries = User_Itinerary.query.filter_by(creator=user.user_id).all()
 
@@ -401,10 +402,11 @@ def delete_flight():
 @app.route("/delete_activity", methods=['POST'])
 def delete_activity():
     activity_to_delete_id = request.json.get('delete_activity')
+    itinerary_id = request.json.get('itinerary_id')
     del_activity = crud.get_activity_by_id(int(activity_to_delete_id))
     db.session.delete(del_activity)
     db.session.commit()
-    return jsonify({'message': 'Activity deleted!'})
+    return jsonify({'message': 'Activity deleted!', 'itinerary_id': itinerary_id})
 
  
 if __name__ == "__main__":

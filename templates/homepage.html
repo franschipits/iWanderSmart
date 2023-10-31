@@ -2,15 +2,14 @@
 {% block title %}Budget Travels Home{% endblock %}
 
 {% block body %}
-  <h1>iWanderSmart</h1>
 
-  <h2>Welcome!</h2>
-  <ul>
+  <h2>Welcome to your favorite itinerary builder!</h2>
+  <!-- <ul>
     <li><a href="/users">View all users</a></li>
     <li><a href="/user_itinerary">View all user's itineraries</a></li>
-  </ul>
+  </ul> -->
  
-  <h2>Create an Account</h2>
+  <h3>Create an Account</h3>
   <form action="/users" method="POST">
     <p>
       User_name <input type="text" name="user_name">
@@ -30,7 +29,7 @@
   </form>
  
   
-  <h2>Log In</h2>
+  <h3>Log In</h3>
   <form action="/login" method="POST">
     <p>
       Email <input type="text" name="email">
