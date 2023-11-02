@@ -3,16 +3,16 @@
 {% block title %} Search Details {% endblock %}
 
 {% block body %}
-{% for result in result_list %}
-<h1>
+{% for result in result_list %}<br>
+<h2>
     <a href="{{extract_url(result['photos'][0]['html_attributions'][0])}}" target="_blank">{{result['name']}} </a>
-</h1>
+</h2>
 
 {{result['formatted_address']}}
 <form action="/add_to_itinerary" method="POST">
 <input type="hidden" name= "name" value="{{result['name']}}">
 <input type="hidden" name="location" value="{{result['formatted_address']}}">
-<button type="submit"> Add to itinerary </button>
+<button class="btn btn-outline-secondary" type="submit"> Add to itinerary </button>
 <select name="itinerary">
     {% for itinerary in itineraries%}
     <option value="{{itinerary.user_itinerary_id}}"> {{itinerary.name_place}} </option>

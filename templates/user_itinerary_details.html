@@ -3,101 +3,157 @@
 {% block title %}{{ user_itinerary.name_place }} - Details{% endblock %}
 
 {% block body %}
-<h1>{{ user_itinerary.name_place }}</h1>
+<div class="row">
+  <div class="col-6">
+    <h1>{{ user_itinerary.name_place }}</h1>
 
-<h2>Budget</h2>
-    <h2 id="user_budget"> {{ user_itinerary.user.budget }}</h2>
-<h3>{{daily_budget.remaining_budget}} Remaning Budget after flights and hotel</h3>
-<h3>{{daily_budget.budget_per_day}} Daily Budget </h3>
+    <h2>
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-piggy-bank" viewBox="0 0 16 16">
+      <path d="M5 6.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm1.138-1.496A6.613 6.613 0 0 1 7.964 4.5c.666 0 1.303.097 1.893.273a.5.5 0 0 0 .286-.958A7.602 7.602 0 0 0 7.964 3.5c-.734 0-1.441.103-2.102.292a.5.5 0 1 0 .276.962z"/>
+      <path fill-rule="evenodd" d="M7.964 1.527c-2.977 0-5.571 1.704-6.32 4.125h-.55A1 1 0 0 0 .11 6.824l.254 1.46a1.5 1.5 0 0 0 1.478 1.243h.263c.3.513.688.978 1.145 1.382l-.729 2.477a.5.5 0 0 0 .48.641h2a.5.5 0 0 0 .471-.332l.482-1.351c.635.173 1.31.267 2.011.267.707 0 1.388-.095 2.028-.272l.543 1.372a.5.5 0 0 0 .465.316h2a.5.5 0 0 0 .478-.645l-.761-2.506C13.81 9.895 14.5 8.559 14.5 7.069c0-.145-.007-.29-.02-.431.261-.11.508-.266.705-.444.315.306.815.306.815-.417 0 .223-.5.223-.461-.026a.95.95 0 0 0 .09-.255.7.7 0 0 0-.202-.645.58.58 0 0 0-.707-.098.735.735 0 0 0-.375.562c-.024.243.082.48.32.654a2.112 2.112 0 0 1-.259.153c-.534-2.664-3.284-4.595-6.442-4.595zM2.516 6.26c.455-2.066 2.667-3.733 5.448-3.733 3.146 0 5.536 2.114 5.536 4.542 0 1.254-.624 2.41-1.67 3.248a.5.5 0 0 0-.165.535l.66 2.175h-.985l-.59-1.487a.5.5 0 0 0-.629-.288c-.661.23-1.39.359-2.157.359a6.558 6.558 0 0 1-2.157-.359.5.5 0 0 0-.635.304l-.525 1.471h-.979l.633-2.15a.5.5 0 0 0-.17-.534 4.649 4.649 0 0 1-1.284-1.541.5.5 0 0 0-.446-.275h-.56a.5.5 0 0 1-.492-.414l-.254-1.46h.933a.5.5 0 0 0 .488-.393zm12.621-.857a.565.565 0 0 1-.098.21.704.704 0 0 1-.044-.025c-.146-.09-.157-.175-.152-.223a.236.236 0 0 1 .117-.173c.049-.027.08-.021.113.012a.202.202 0 0 1 .064.199z"/>
+      </svg> Budget:
+    </h2>
 
+    <h2 id="user_budget"> ${{ user_itinerary.user.budget }}</h2>
 
+    <p>Your remaning budget after flights and hotel is: ${{daily_budget.remaining_budget}} </p>
+
+    <p>Your daily budget is: ${{daily_budget.budget_per_day}} </p>
+
+    <br>
+  </div>
+  
+  <div class="col-3 offset-3">
     <h2 id="user_notes"> {{ user_itinerary.notes }}</h2>
+
     <form id="notes_update">
-        <input type="hidden" id="note_update_itin_id" value="{{user_itinerary.user_itinerary_id}}">
-        <label for="notes">Notes:</label><br>
-        <input type="text" id="notes" name="notes"><br>
-        <input type="submit" value="Submit">
+      <input type="hidden" id="note_update_itin_id" value="{{user_itinerary.user_itinerary_id}}">
+      <label for="notes"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+        </svg> Add your notes here:
+      </label>
+      
+      <input type="text" id="notes" name="notes">
+      
+      <input class="btn btn-outline-secondary" type="submit" value="Submit">
     </form>
- 
- 
-    <h2>Flights:</h2>
-    <ul id="flight_results">
-    {% for flight in user_itinerary.flights %}
-    <div>
-        <li>Type of Flight: {{flight.type_flight}} </li>
-        <li>Date/Time: {{flight.date_time}} </li>
-        <li>Price: {{flight.price}} </li>
-    <button class="delete_flight" id="{{flight.flight_id}}"> Delete </button>
-    </div>
-    {% endfor %}
-   </ul>
-
-
-
-    <h2>Hotels:</h2>
-    <ul>
-    {% for hotel in user_itinerary.hotels %}
-        <li>Number of nights: {{hotel.num_nights}} </li>
-        <li>Price: {{hotel.price}}</li>
-        <li>Hotel name: {{hotel.name}}</li>
-    <button class="delete_hotel" id="{{hotel.hotel_id}}"> Delete </button>
-    {% endfor %}
-   </ul>
-
-   
-   <h2>Activities:</h2>
-   <ul>
-    {% for activity in user_itinerary.activities %}
-        <li class="activity{{activity.activities_id}}">Activity Name: {{activity.name}} </li>
-        <li class="activity{{activity.activities_id}}">Adress: {{activity.address}} </li>
-        <li class="activity{{activity.activities_id}}">Contact: {{activity.contact_info}} </li>
-    <button class="delete_activities activity{{activity.activities_id}}" id="{{activity.activities_id}}" name="{{user_itinerary.user_itinerary_id}}"> Delete </button>
-    {% endfor %}
-   </ul>
- 
-   
- 
-   
-    <h2 id="delete_itinerary"></h2>
-    <button id="delete_user_itinerary" value="{{user_itinerary.user_itinerary_id}}"> Delete </button>
-
-<div data-spy="scroll" data-target="#navbar" data-offset="0">
-<h2>Restaurant Suggestions based on daily budget:</h2>
-<ul>
-    {% for result in result_list %}
-    <li>Restaurant Name:{{result['name']}}</li>
-    <li>Adress: {{result['formatted_address']}}</li>
-    <li>Price Level: {{result.get('price_level')}}</li>
-    <li>Rating: {{result['rating']}}</li><br>
-    {% endfor %}
-</div>
-</ul>
-
- 
-
-<h2>Flight Information</h2>
-<form id="flight_info">
-    <input type="hidden" id="itinerary_to_add_to" value="{{user_itinerary.user_itinerary_id}}">
-    <label for="flight_type">Flight Type:</label>
-    <select id="type_flight" name="flight_type">
-        <option value="Departure">Departure</option>
-        <option value="Return">Return</option>
-    </select>
+    <br>
+    <button class="btn btn-outline-secondary" id="delete_user_itinerary" value="{{user_itinerary.user_itinerary_id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+        </svg> Delete Itinerary 
+    </button>
+    <br>
     
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4">
+    <h2> 
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-airplane" viewBox="0 0 16 16">
+        <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Zm.894.448C7.111 2.02 7 2.569 7 3v4a.5.5 0 0 1-.276.447l-5.448 2.724a.5.5 0 0 0-.276.447v.792l5.418-.903a.5.5 0 0 1 .575.41l.5 3a.5.5 0 0 1-.14.437L6.708 15h2.586l-.647-.646a.5.5 0 0 1-.14-.436l.5-3a.5.5 0 0 1 .576-.411L15 11.41v-.792a.5.5 0 0 0-.276-.447L9.276 7.447A.5.5 0 0 1 9 7V3c0-.432-.11-.979-.322-1.401C8.458 1.159 8.213 1 8 1c-.213 0-.458.158-.678.599Z"/>
+        </svg>
+        <i class="bi bi-airplane"></i> Flights:
+    </h2>
+    <div id="flight_results">
+      {% for flight in user_itinerary.flights %}
+        <div class="border-type">
+          <p>Type of Flight: {{flight.type_flight}} </p>
+          <p>Date/Time: {{flight.date_time}} </p>
+          <p>Price: {{flight.price}} </p>
+          <button class="delete_flight btn btn-outline-secondary" id="{{flight.flight_id}}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+            </svg> Delete
+          </button>
+        </div>
+      {% endfor %}
+      </div>
+    <div class="border-type">
+      <h3>Enter your flight information:</h3>
+      <form id="flight_info">
+        <input type="hidden" id="itinerary_to_add_to" value="{{user_itinerary.user_itinerary_id}}">
+        <label for="flight_type">Flight Type:</label>
+        <select id="type_flight" name="flight_type">
+          <option value="Departure">Departure</option>
+          <option value="Return">Return</option>
+        </select>
+          
         <br>
-        <label for="date_and_time">Date and Time:</label><br>
-        <input type="datetime-local" id="date_time" name="date_time" value=""><br>
-   
-        
-        <label for="price_flight">Flight Price:</label><br>
-        <input type="number" id="price" name="price" value=""><br>
-   
+        <label for="date_and_time">Date and Time:</label>
+        <br>
+        <input type="datetime-local" id="date_time" name="date_time" value="">
+        <br>
+        <label for="price_flight">Flight Price:</label>
+        <br>
+        <input type="number" id="price" name="price" value="">
+        <br>
+        <button class="btn btn-outline-secondary" type="submit"> Add to itinerary </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-4">
+    <h2>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
+            <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+            <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"/>
+        </svg> Hotels:
+    </h2>
+    {% for hotel in user_itinerary.hotels %}
+      <div class="border-type">
+        <p>Number of nights: {{hotel.num_nights}}</p>
+        <p>Price: {{hotel.price}}</p>
+        <p>Hotel name: {{hotel.name}}</p>
+        <button class="delete_hotel btn btn-outline-secondary" id="{{hotel.hotel_id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+          <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+          </svg> Delete 
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="col-4">
+    <h2>
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-bicycle" viewBox="0 0 16 16">
+      <path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"/>
+      </svg> <i class="bi bi-bicycle"></i> Activities:
+    </h2>
+    {% for activity in user_itinerary.activities %}
+      <div class="border-type">
+        <p class="activity{{activity.activities_id}}">Activity Name: {{activity.name}} </p>
+        <p class="activity{{activity.activities_id}}">Adress: {{activity.address}} </p>
+        <p class="activity{{activity.activities_id}}">Contact: {{activity.contact_info}} </p>
+        <button class="delete_activities activity{{activity.activities_id}} btn btn-outline-secondary" id="{{activity.activities_id}}" name="{{user_itinerary.user_itinerary_id}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+          <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+          </svg> Delete 
+        </button>
+      </div>
+    {% endfor %}
+  </div>
+  <br>
+</div>
+<br>
+<h2> 
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-cup-hot" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6H.5ZM13 12.5a2.01 2.01 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5ZM2.64 13.825 1.123 7h11.754l-1.517 6.825A1.5 1.5 0 0 1 9.896 15H4.104a1.5 1.5 0 0 1-1.464-1.175Z"/>
+  <path d="m4.4.8-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 3.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8Zm3 0-.003.004-.014.019a4.167 4.167 0 0 0-.204.31 2.327 2.327 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.31 3.31 0 0 1-.202.388 5.444 5.444 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 6.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8Zm3 0-.003.004-.014.019a4.077 4.077 0 0 0-.204.31 2.337 2.337 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.593.593 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3.198 3.198 0 0 1-.202.388 5.385 5.385 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4.149 4.149 0 0 0 .204-.31 2.06 2.06 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.593.593 0 0 0-.09-.252A4.334 4.334 0 0 0 9.6 2.8l-.01-.012a5.099 5.099 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a5.446 5.446 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8Z"/>
+  </svg> Restaurant suggestions based on daily budget:
+</h2>
 
-    <button type="submit"> Add to itinerary </button>
-
-</form>
-
-
+<div class="row">
+  <ul id="restaurant-menu">
+    {% for result in result_list %}
+        <div class="border-type left-spacing">
+            <p>Restaurant Name:{{result['name']}}</p>
+            <p>Adress: {{result['formatted_address']}}</p>
+            <p>Price Level: {{result.get('price_level')}}</p>
+            <p>Rating: {{result['rating']}}</p>
+        </div>
+    {% endfor %}
+  </ul>
+</div>
 
 
 <script src="/static/delete_itinerary.js"> </script>   

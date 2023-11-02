@@ -22,10 +22,10 @@ form.addEventListener('submit', (evt) => {
     .then((responseJSON) => {
         document.querySelector('#flight_results')
         .insertAdjacentHTML('beforeend', `<div>
-        <li>Type of Flight: ${responseJSON.type_flight} </li>
-        <li>Date/Time: ${responseJSON.date_time} </li>
-        <li>Price: ${responseJSON.price} </li>
-    <button class="delete_flight" id="${responseJSON.flight_id}"> Delete </button>
+        <p>Type of Flight: ${responseJSON.type_flight} </p>
+        <p>Date/Time: ${responseJSON.date_time} </p>
+        <p>Price: ${responseJSON.price} </p>
+    <button class="delete_flight btn btn-outline-secondary" id="${responseJSON.flight_id}"> Delete </button>
     </div>`)
     })
 

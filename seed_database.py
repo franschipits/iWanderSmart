@@ -64,7 +64,7 @@ model.db.session.commit()
 user_itinerary = []
 
 for user in users:
-    current_place = choice(["Brazil", "Chicago", "Paris", "Austin"])
+    current_place = choice(["Sao Paulo", "Chicago", "Paris", "Austin"])
     new_itinerary = crud.create_user_itinerary(user.user_id, current_place)
     user_itinerary.append(new_itinerary)
 
