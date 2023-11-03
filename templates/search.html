@@ -3,32 +3,35 @@
 {% block title %} Search Details {% endblock %}
 
 {% block body %}
+
 {% for result in result_list %}<br>
-<h2>
-    <a href="{{extract_url(result['photos'][0]['html_attributions'][0])}}" target="_blank">{{result['name']}} </a>
-</h2>
+    <div class="border-type">
+        <h2>
+            <a href="{{extract_url(result['photos'][0]['html_attributions'][0])}}" target="_blank">{{result['name']}} </a>
+        </h2>
 
-{{result['formatted_address']}}
-<form action="/add_to_itinerary" method="POST">
-<input type="hidden" name= "name" value="{{result['name']}}">
-<input type="hidden" name="location" value="{{result['formatted_address']}}">
-<button class="btn btn-outline-secondary" type="submit"> Add to itinerary </button>
-<select name="itinerary">
-    {% for itinerary in itineraries%}
-    <option value="{{itinerary.user_itinerary_id}}"> {{itinerary.name_place}} </option>
-    {% endfor %}
-</select>
-<select name="hotelxactivity">
-    <option value="unselected">Choose one</option>
-    <option value="hotel">Hotel</option>
-    <option value="activity">Activity</option>
-</select>
+        {{result['formatted_address']}}
+        <form action="/add_to_itinerary" method="POST">
+        <input type="hidden" name= "name" value="{{result['name']}}">
+        <input type="hidden" name="location" value="{{result['formatted_address']}}">
+        <button class="btn btn-outline-secondary" type="submit"> Add to itinerary </button>
+        <select name="itinerary">
+            {% for itinerary in itineraries%}
+            <option value="{{itinerary.user_itinerary_id}}"> {{itinerary.name_place}} </option>
+            {% endfor %}
+        </select>
+        <select name="hotelxactivity">
+            <option value="unselected">Choose one</option>
+            <option value="hotel">Hotel</option>
+            <option value="activity">Activity</option>
+        </select>
 
-<input type="number" placeholder="Number of Nights" name="number_nights" value="">
-<input type="number" placeholder="Total Price" name="price_hotel" value="">
+        <input type="number" placeholder="Number of Nights" name="number_nights" value="">
+        <input type="number" placeholder="Total Price" name="price_hotel" value="">
 
-</form>
+        </form>
+    </div>
 {% endfor %}
+
 {% endblock %}
- 
  

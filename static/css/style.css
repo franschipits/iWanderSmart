@@ -76,10 +76,10 @@ img {
     background-color: white;
     padding: 20px;
     box-shadow: 8px 8px 30px 8px grey;
-    width: 50%;
+    width: 55%;
     border-radius: 16px;
     margin-top: 15vh;
-    margin-left: 15vh;
+    margin-left: -1vh;
     z-index: 5;
 }
 
@@ -105,4 +105,8 @@ img {
 #navbar {
     width: 100%;
     padding: 10px;
+}
+
+#logout-button {
+    color: #7C6C77;
 }
