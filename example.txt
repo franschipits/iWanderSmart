@@ -23,7 +23,7 @@
   'reference': 'ChIJVfqc7c9x5kcRS42v9lHAbBk',
   'types': ['lodging', 'point_of_interest', 'establishment'],
   'user_ratings_total': 2509}
-
+ 
 
 
 

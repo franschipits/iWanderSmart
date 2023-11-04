@@ -33,7 +33,7 @@ class User_Itinerary(db.Model):
     creator = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     name_place = db.Column(db.String)
     notes = db.Column(db.Text, default="Notes")
-
+ 
  
     
     # places_id = db.Column(db.Integer, db.ForeignKey("places.places_id"))

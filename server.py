@@ -70,7 +70,7 @@ def user_login():
 
     elif password != user.password:
         flash("Password incorrect")
-
+ 
     else:
         session['current_user'] = user.email
         flash("Logged in!")

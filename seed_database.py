@@ -13,8 +13,8 @@ os.system('createdb travels')
 
 model.connect_to_db(server.app)
 model.db.create_all()
+  
  
-
 #User:
 users = []
 names = ["Stone", "Fredric", "Cornelius", "Kaitlyn", "Destinee", "Stacia", "Addie", "Roman", "Eliott", "Davin", "Maisy"]
