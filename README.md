@@ -22,10 +22,10 @@ The iWanderSmart is an itinerary builder application made with Python and Flask.
 The app allows users to create an account, log in and log out of their account. 
 ![Homepage image](/static/images/Homepage.png)
 
-When a user logs in, they are taken to their profile page, where they can input their budget. I used AJAX to create a dynamic budget update feature, allowing users to update their budgets without requiring a full page refresh.
+When a user logs in, they are taken to their profile page, where they can input their budget. I used AJAX to create a dynamic budget update feature, allowing users to update their budgets without requiring a full page refresh. Under My Itineraries, users can also visualize their Budget per day in each itinerary, being able to compare itineraries and decide which one can fit best within their budget at the moment.
 ![Profile page image](/static/images/Profile-Page.png)
 
-Users can also create a new itinerary by simply naming them and clicking the “create” button. Then they can navigate to the itinerary details page, where they can input their flight  and hotel information. 
+Users can also create a new itinerary by simply naming them and clicking the “create” button. Then they can navigate to the itinerary details page, where they can input their flight and hotel information. They can also remove items from a specific itinerary or delete the itinerary as a whole.
 ![User itinerary details page image](/static/images/User-itinerary-details-page.png)
 
 The Google Places API enables users to search for, and add, accommodation information and activities to their itinerary, being able to also view photos and the location on the map. And all the data entered is stored in my Postgres database using SQLAlchemy.
