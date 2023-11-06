@@ -1,7 +1,24 @@
-Hi, I’m Fran! And with my background in finance and my passion for photography and traveling, I got inspired to create this application, combining my experiences and passions into a single platform.
+# About me
+Hi, I’m Fran! And with my background in finance and my passion for photography and traveling, I got inspired to create this application, combining my experiences and passions into a single platform. 
 ![Contact info image](/static/images/FrancianeSchipits.png)
+
+# iWanderSmart
 The iWanderSmart is an itinerary builder application made with Python and Flask. It is designed to improve travel planning, allowing users to create personalized travel itineraries while staying within a predefined budget.
 
+# Tech Stack 
+- Python
+- HTML
+- Jinja2
+- Flask
+- PostgreSQL
+- SQLAlchemy
+- JavaScript
+- AJAX
+- JQuery
+- CSS
+- Bootstrap
+
+# Features
 The app allows users to create an account, log in and log out of their account. 
 ![Homepage image](/static/images/Homepage.png)
 
