@@ -20,7 +20,7 @@ The iWanderSmart is an itinerary builder application made with `Python` and `Fla
 
 # Features
 The app allows users to create an account, log in and log out of their account. 
-![Homepage image](/static/images/Homepage.png)
+![Homepage image](/static/images/gif-project-login.gif)
 
 When a user logs in, they are taken to their profile page, where they can input their budget. I used `AJAX` to create a dynamic budget update feature, allowing users to update their budgets without requiring a full page refresh. Under My Itineraries, users can also visualize their Budget per day in each itinerary, being able to compare itineraries and decide which one can fit best within their budget at the moment.
 ![Profile page image](/static/images/Profile-Page.png)
