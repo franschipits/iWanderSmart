@@ -1,5 +1,5 @@
 # About me
-Hi, I’m Fran! And with my background in finance and my passion for photography and traveling, I got inspired to create this application, combining my experiences and passions into a single platform. 
+Franciane is a Brazilian living in the US for 6 years.  In Brazil Fran went to College for Business Management.  She was a financial analyst where she uses to do bank reconciliations and manage providers accounts. Most recently Fran was a freelance photographer, where she had to manage her own small business and client relations. She now started a Software Engineering program at Hackbright Academy, where she is learning full stack programming to prepare for a career in Software Engineering. She loves learning new things and she looks forward to finding a job as a backend Software Engineer where she can put into practice her programming skills. With her background in finance and her passion for photography and traveling, Fran got inspired to create this application, combining her experiences and passions into a single platform. 
 ![Contact info image](/static/images/FrancianeSchipits.png)
 
 # iWanderSmart
@@ -13,8 +13,6 @@ The iWanderSmart is an itinerary builder application made with `Python` and `Fla
 - PostgreSQL
 - SQLAlchemy
 - JavaScript
-- AJAX
-- JQuery
 - CSS
 - Bootstrap
 
@@ -34,7 +32,7 @@ The Google Places `API` enables users to search for, and add, accommodation info
 Upon entering this information, the application will automatically calculate the remaining budget by deducting the costs of flights and hotels, and then display the user's daily budget. 
 ![User itinerary details page image](/static/images/User-itinerary-details-page.png)
 
-Additionally, at the bottom of the page, a curated list of restaurant recommendations will be provided, tailored to the user's remaining daily budget.
+Additionally, at the bottom of the page, a curated list of restaurant recommendations will be provided, tailored to the user's remaining daily budget. The Google Places `API` provided a list of information about restaurants including price range and ratings, which was very useful for this feature.
 ![Restaurant Suggestion image](/static/images/gif-restaurant-suggestions.gif)
 
 Another notable feature is the "All Users Itineraries", offering users the opportunity to browse, save and edit copies of itineraries created by fellow users directly in their own profiles.
@@ -43,4 +41,43 @@ Another notable feature is the "All Users Itineraries", offering users the oppor
 I styled my app using a combination of `Bootstrap` and `CSS` to create a visually appealing, well-organized layout.
 
 This application was created so users can plan their dream getaway while maintaining control of their finances. Set your budget, and iWanderSmart will help you keep track of your expenses, ensuring you stay within your financial limits.
+
+# Installing iWanderSmart
+Clone this repo into your computers directory:
+```python
+https://github.com/franschipits/iWanderSmart.git
+```
+
+Create your virtual environment inside your iWanderSmart Directory:
+```python
+virtualenv env
+```
+
+Activate the environment:
+```python
+source env/bin/activate
+```
+
+Install the Requirements:
+```python
+pip install -r requirements.txt
+```
+
+Create your database(db):
+```python
+createdb travels
+  python3 -i model.py
+       >>db.create_all()
+```
+
+Sign up to use the [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview)
+
+Run the application:
+```python
+python3 server.py
+```
+
+
+
+
  
