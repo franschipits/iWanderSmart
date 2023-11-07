@@ -1,5 +1,5 @@
 # About me
-Franciane is a Brazilian living in the US for 6 years.  In Brazil Fran went to College for Business Management.  She was a financial analyst where she uses to do bank reconciliations and manage providers accounts. Most recently Fran was a freelance photographer, where she had to manage her own small business and client relations. She now started a Software Engineering program at Hackbright Academy, where she is learning full stack programming to prepare for a career in Software Engineering. She loves learning new things and she looks forward to finding a job as a backend Software Engineer where she can put into practice her programming skills. With her background in finance and her passion for photography and traveling, Fran got inspired to create this application, combining her experiences and passions into a single platform. 
+Franciane is a Brazilian living in the US for 6 years. In Brazil Fran went to College for Business Management. She was a financial analyst where she used to do bank reconciliations and manage providers accounts. Most recently Fran worked as a freelance photographer, where she had to manage her own small business and client relations. She recently completed a Software Engineering program at Hackbright Academy, where she learned full stack programming to prepare for a career in Software Engineering. She loves learning new things and she looks forward to finding a job as a backend Software Engineer where she can put into practice her programming skills. With her background in finance and her passion for photography and traveling, Fran got inspired to create this application, combining her experiences and passions into a single platform. 
 ![Contact info image](/static/images/FrancianeSchipits.png)
 
 # iWanderSmart
@@ -71,6 +71,11 @@ createdb travels
 ```
 
 Sign up to use the [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview)
+
+Save your API Key in a file named secrets.sh in the following format:
+```python
+export GOOGLEPLACES_API_KEY="YOURKEY"
+```
 
 Run the application:
 ```python
