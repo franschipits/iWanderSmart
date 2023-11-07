@@ -36,7 +36,7 @@ Additionally, at the bottom of the page, a curated list of restaurant recommenda
 ![Restaurant Suggestion image](/static/images/gif-restaurant-suggestions.gif)
 
 Another notable feature is the "All Users Itineraries", offering users the opportunity to browse, save and edit copies of itineraries created by fellow users directly in their own profiles.
-![All User itineraries page image](/static/images/gif-all-users-itineraries.gif)
+![All User itineraries page image](/static/images/all-users-itineraries-gif.gif)
 
 I styled my app using a combination of `Bootstrap` and `CSS` to create a visually appealing, well-organized layout.
 
