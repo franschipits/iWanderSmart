@@ -77,7 +77,7 @@ Run the application:
 python3 server.py
 ```
 
-
+You can now access iWanderSmart at 'localhost:5000/' and start creating your itineraries!
 
 
  
